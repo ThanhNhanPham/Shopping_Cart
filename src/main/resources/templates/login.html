@@ -27,7 +27,7 @@
                           </div>
 
                          <div class="card-body">
-                             <form action="/login" method="post">
+                             <form th:action="@{/auth/login}" method="post">
                                  <div class="mb-3">
                                      <label class="form-label">Email</label>
                                      <input class="form-control" name="username" type="email">
@@ -37,7 +37,7 @@
                                      <label class="form-label">Password</label>
                                      <input class="form-control" name="password" type="password">
                                  </div>
-                                 <button type="submit" class="btn bg-primary text-white col-md-12" >Login</button>
+                                 <button type="submit" class="btn bg-primary text-white col-md-12" >Đăng nhập</button>
                              </form>
                          </div>
 

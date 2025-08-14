@@ -138,18 +138,13 @@ public class HomeController {
         model.addAttribute("product",product);
         return "view_product";
     }
-
-
-
-
-
     //Uodate thong tin dang ki
     @PostMapping("/saveRegister")
     public String saveRegister(@ModelAttribute UserDtls userDtls, @RequestParam("img") MultipartFile file , HttpSession session) throws IOException {
 
          Boolean existsEmail = userService.existsEmail(userDtls.getEmail());
          if(existsEmail){
-             session.setAttribute("errorMsg", "Email already exists");
+             session.setAttribute("errorMsg", "Email đã tồn tại");
          }else {
 
 
@@ -169,9 +164,9 @@ public class HomeController {
 
                      Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
                  }
-                 session.setAttribute("sucMsg", "Register save successfully");
+                 session.setAttribute("sucMsg", "Đăng ký thành công, vui lòng đăng nhập");
              } else {
-                 session.setAttribute("errorMsg", "Register save failed");
+                 session.setAttribute("errorMsg", "Đăng ký không thành công, vui lòng thử lại");
              }
          }
 
@@ -199,7 +194,7 @@ public class HomeController {
     public String processForgotPassWord(@RequestParam String email, HttpSession session, HttpServletRequest request){
         UserDtls userByEmail = userService.getUserByEmail(email);
         if(ObjectUtils.isEmpty(userByEmail)){
-            session.setAttribute("errorMsg", "Invalid email");
+            session.setAttribute("errorMsg", "Email không tồn tại trong hệ thống");
         }else {
             String resetToken = UUID.randomUUID().toString();
             userService.updateUserResetToken(email, resetToken);
@@ -207,18 +202,15 @@ public class HomeController {
             // Generate URL :
             // http://localhost:8080/reset-password?token=sfgdbgfswegfbdgfewgvsrg
             String url = CommonUtil.generateUrl(request);
-
-
             Boolean send = commonUtil.sendMail();
               if (send){
-                  session.setAttribute("sucMsg", "Please check your email..Password Reset link sent");
+                  session.setAttribute("sucMsg", "Vui lòng kiểm tra email của bạn để đặt lại mật khẩu");
               }else{
-                  session.setAttribute("errorMsg", "Somethong wrong on server ! Email not send");
+                  session.setAttribute("errorMsg", "Không thể gửi email, vui lòng thử lại sau");
               }
         }
         return "redirect:/forgot-password";
     }
-
     @GetMapping("/reset-password")
     public String showResetPass(){
         return "reset-password";

@@ -4,6 +4,7 @@ import com.ecom.Shopping_Cart.model.Category;
 import com.ecom.Shopping_Cart.model.Product;
 import com.ecom.Shopping_Cart.model.ProductOrder;
 import com.ecom.Shopping_Cart.model.UserDtls;
+import com.ecom.Shopping_Cart.repository.UserRepository;
 import com.ecom.Shopping_Cart.service.*;
 import com.ecom.Shopping_Cart.util.CommonUtil;
 import com.ecom.Shopping_Cart.util.OrderStatus;
@@ -36,6 +37,8 @@ public class AdminController {
     private final CategoryService categoryService;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     public AdminController(CategoryService categoryService) {
@@ -57,7 +60,7 @@ public class AdminController {
     @Autowired
     private CommonUtil commonUtil;
 
-    //xac dinh nguoi dung bang name trong navbar khi dang nhap
+    //xac dinh nguoi dung bang name trong navbar khi dang nhập
     @ModelAttribute
     public void getUserDDetails(Principal p, Model model) {
 
@@ -107,7 +110,7 @@ public class AdminController {
         Boolean existCategory = categoryService.existCategory(category.getName());
         if (existCategory) {
 
-            session.setAttribute("errorMsg", "Ten Danh Muc Da Ton Tai");
+            session.setAttribute("errorMsg", "Tên danh mục đã tồn tại! Vui lòng nhập tên khác");
 
         } else {
 
@@ -115,7 +118,7 @@ public class AdminController {
 
             if (ObjectUtils.isEmpty(savedCategory)) {
 
-                session.setAttribute("errorMsg", "Not Save! Internal sever error");
+                session.setAttribute("errorMsg", "Không thể luu! Có lỗi trên server");
 
             } else {
                 //Luu vao duong dan hinh anh trong O D:/ sau khi nhan luu thong tin
@@ -127,7 +130,7 @@ public class AdminController {
 
                 Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
-                session.setAttribute("sucMsg", "Saved successfully");
+                session.setAttribute("sucMsg", "Lưu thành công!");
             }
         }
 
@@ -140,9 +143,9 @@ public class AdminController {
     public String deleteCategory(@PathVariable("id") int id, HttpSession session) {
         Boolean deleteCategory = categoryService.deleteCategory(id);
         if (deleteCategory) {
-            session.setAttribute("sucMsg", "Xoa thanh cong!");
+            session.setAttribute("sucMsg", "Xóa thành công!");
         } else {
-            session.setAttribute("errorMsg", "Co loi tren server");
+            session.setAttribute("errorMsg", "Có lỗi trên server");
         }
 
         return "redirect:/admin/category";
@@ -174,15 +177,14 @@ public class AdminController {
         Category updateCategory = categoryService.saveCategory(oldCategory);
 
         if (!ObjectUtils.isEmpty(updateCategory)) {
-            session.setAttribute("sucMsg", "Category update successfully");
+            session.setAttribute("sucMsg", "Category cập nhật thành công");
         } else {
-            session.setAttribute("errorMsg", "Co loi tren server");
+            session.setAttribute("errorMsg", "Có lỗi trn Server");
         }
 
         return "redirect:/admin/loadEditCategory/" + category.getId();
 
     }
-
 
 //    Them moi san pham vao data
     @PostMapping("/saveProduct")
@@ -206,7 +208,7 @@ public class AdminController {
 
             Files.copy(image.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
-            session.setAttribute("sucMsg", "Product save successfully");
+            session.setAttribute("sucMsg", "Product câp nhật thành công");
         }else{
             session.setAttribute("errorMsg", "Có lỗi trên server");
         }
@@ -261,14 +263,13 @@ public class AdminController {
     public String deleteProduct(@PathVariable("id") int id, HttpSession session){
         Boolean deleteProduct = productService.deleteProduct(id);
         if(deleteProduct){
-            session.setAttribute("sucMsg", "Product delete successfully");
+            session.setAttribute("sucMsg", "Product xóa thành công");
         }else{
-            session.setAttribute("errorMsg", "Co loi tren server");
+            session.setAttribute("errorMsg", "Có lỗi trên server");
         }
 
         return "redirect:/admin/loadProduct";
     }
-
 
     //load san pham bang id len edit_product
 
@@ -294,9 +295,9 @@ public class AdminController {
 
             if (!ObjectUtils.isEmpty(updateProduct)) {
 
-                session.setAttribute("sucMsg", "Product update successfully");
+                session.setAttribute("sucMsg", "Product cập nhật thành công");
             } else {
-                session.setAttribute("errorMsg", "Co loi tren server");
+                session.setAttribute("errorMsg", "Có lỗi trên server");
             }
         }
         return "redirect:/admin/loadEditProduct/"+product.getId();
@@ -327,7 +328,7 @@ public class AdminController {
        if(f){
            session.setAttribute("sucMsg", "Account update successfully");
        }else{
-           session.setAttribute("errorMsg", "Co loi tren server");
+           session.setAttribute("errorMsg", "Có lỗi trên server");
        }
 
         return "redirect:/admin/users?type="+type;
@@ -381,9 +382,9 @@ public class AdminController {
         }
 
         if(!ObjectUtils.isEmpty(updateStatus)){
-            session.setAttribute("sucMsg","Order status updated successfully");
+            session.setAttribute("sucMsg","Trạng thái đơn hàng đã được cập nhật thành công");
         }else{
-            session.setAttribute("errorMsg","Order status update failed");
+            session.setAttribute("errorMsg","Trạng thái đơn hàng không được cập nhật");
         }
 
 
@@ -455,9 +456,9 @@ public class AdminController {
 
                 Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
             }
-            session.setAttribute("sucMsg", "Register save successfully");
+            session.setAttribute("sucMsg", "Thêm admin thành công");
         }else{
-            session.setAttribute("errorMsg", "Register save failed");
+            session.setAttribute("errorMsg", "Có lỗi trên server");
         }
 
         return "redirect:/admin/add-admin";
@@ -477,16 +478,15 @@ public class AdminController {
     public String updateUserProfile(@ModelAttribute UserDtls user, @RequestParam MultipartFile img,HttpSession session){
         UserDtls updateProfile = userService.updateUserProfile(user, img);
         if(ObjectUtils.isEmpty(updateProfile)){
-            session.setAttribute("errorMsg","Profile update failed");
+            session.setAttribute("errorMsg","Cập nhật profile không thành công");
 
         }else{
-            session.setAttribute("sucMsg","Profile updated successfully");
+            session.setAttribute("sucMsg","Cập nhật profile thành công");
         }
 
 
         return "redirect:/admin/profile";
     }
-
 
 //    Thay doi mat khau cho admin
     @PostMapping("/change-password")
@@ -500,7 +500,7 @@ public class AdminController {
             loggedInUserDetails.setPassword(encode);
             UserDtls userUpdate = userService.updateUser(loggedInUserDetails);
             if(ObjectUtils.isEmpty(userUpdate)){
-                session.setAttribute("errorMsg","PassWord not update || Error in server");
+                session.setAttribute("errorMsg","Mật khẩu chua update || Có lỗi trên server");
             }else{
                 session.setAttribute("sucMsg","Password updated successfully");
             }

@@ -7,6 +7,7 @@ import com.ecom.Shopping_Cart.service.OrderService;
 import com.ecom.Shopping_Cart.service.UserService;
 import com.ecom.Shopping_Cart.util.CommonUtil;
 import com.ecom.Shopping_Cart.util.OrderStatus;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.util.List;
@@ -64,21 +66,46 @@ public class UserController {
         model.addAttribute("categories", categories);
     }
 
-    //Them san pham theo user vao gio hang
+    // Them san pham theo user vao gio hang
     @GetMapping("/addCart")
     public String addCart(@RequestParam int pid, @RequestParam int uid, HttpSession session){
         Cart saveCart = cartService.saveCart(pid, uid);
 
         if(ObjectUtils.isEmpty(saveCart)){
-            session.setAttribute("errorMsg","Product add to cart failed");
+            session.setAttribute("errorMsg","Thêm sản phẩm vào giỏ hàng thất bại");
         }else{
-            session.setAttribute("sucMsg","Product add to cart success");
+            session.setAttribute("sucMsg","Thêm sản phẩm vào giỏ hàng thành công");
         }
 
         return "redirect:/product/"+pid;
     }
 
-
+//    @PostMapping("/cart/add")
+//    public String addCart(@RequestParam("pid") int pid,
+//                          Principal p,
+//                          RedirectAttributes ra) {
+//        // lấy user từ Principal, không nhận uid từ client
+//        UserDtls user = getLoggedInUserDetails(p);
+//        if (pid <= 0) {
+//            ra.addFlashAttribute("errorMsg", "Product không hợp lệ");
+//            return "redirect:/";
+//        }
+//
+//        try {
+//            Cart saved = cartService.saveCart(pid, user.getId()); // giữ nguyên service
+//            if (saved == null) {
+//                ra.addFlashAttribute("errorMsg", "Thêm vào giỏ hàng thất bại");
+//            } else {
+//                ra.addFlashAttribute("sucMsg", "Đã thêm sản phẩm vào giỏ hàng");
+//            }
+//        } catch (EntityNotFoundException ex) {
+//            ra.addFlashAttribute("errorMsg", "Không tìm thấy sản phẩm");
+//        } catch (IllegalStateException ex) {
+//            ra.addFlashAttribute("errorMsg", ex.getMessage()); // ví dụ: hết hàng
+//        }
+//
+//        return "redirect:/product/" + pid;
+//    }
     //Load san pham len gio hang
     @GetMapping("/cart")
     public String loadCartPage(Principal p,Model model){
@@ -94,7 +121,6 @@ public class UserController {
         return "user/cart";
     }
 
-
     private UserDtls getLoggedInUserDetails(Principal p) {
         String email = p.getName();
         UserDtls userDtls = userService.getUserByEmail(email);
@@ -109,8 +135,6 @@ public class UserController {
         return "redirect:/user/cart";
 
     }
-
-
     //Load thong tin tien tung mat hang va tong tien tat ca tu gio hang theo user len view order
     @GetMapping("/order")
     public  String orderPage(Principal p, Model model){
@@ -173,9 +197,9 @@ public class UserController {
 
 
         if(!ObjectUtils.isEmpty(updateStatus)){
-            session.setAttribute("sucMsg","Order status updated successfully");
+            session.setAttribute("sucMsg","Trạng thái đơn hàng đã được cập nhật thành công");
         }else{
-            session.setAttribute("errorMsg","Order status update failed");
+            session.setAttribute("errorMsg","Trạng thái đơn hàng không được cập nhật");
         }
 
 
@@ -195,18 +219,17 @@ public class UserController {
     public String updateUserProfile(@ModelAttribute UserDtls user, @RequestParam MultipartFile img,HttpSession session){
         UserDtls updateProfile = userService.updateUserProfile(user, img);
         if(ObjectUtils.isEmpty(updateProfile)){
-            session.setAttribute("errorMsg","Profile update failed");
+            session.setAttribute("errorMsg","Cập nhật profile không thành công");
 
         }else{
-            session.setAttribute("sucMsg","Profile updated successfully");
+            session.setAttribute("sucMsg","Profile đã được cập nhật thành công");
         }
 
 
         return "redirect:/user/profile";
     }
 
-
-//thay doi mat khau
+    //thay doi mat khau
     @PostMapping("/change-password")
     public String changePassword(@RequestParam String newPassword, @RequestParam String currentPassword,Principal p,HttpSession session){
         UserDtls loggedInUserDetails = getLoggedInUserDetails(p);
@@ -217,17 +240,14 @@ public class UserController {
             loggedInUserDetails.setPassword(encode);
             UserDtls userUpdate = userService.updateUser(loggedInUserDetails);
             if(ObjectUtils.isEmpty(userUpdate)){
-                session.setAttribute("errorMsg","PassWord not update || Error in server");
+                session.setAttribute("errorMsg","Mật khâu không được cập nhật || Lỗi trong server");
             }else{
-                session.setAttribute("sucMsg","Password updated successfully");
+                session.setAttribute("sucMsg","Mật khẩu đã được cập nhật thành công");
             }
 
         }else{
-            session.setAttribute("errorMsg","Current PassWord incorrect");
+            session.setAttribute("errorMsg","Mật khẩu hiện tại không đúng");
         }
-
         return "redirect:/user/profile";
     }
-
-
 }

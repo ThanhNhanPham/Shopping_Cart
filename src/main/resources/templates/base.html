@@ -83,7 +83,12 @@
                                  <li th:if="${user.role== 'ROLE_ADMIN' }"><a class="dropdown-item" href="/admin/profile">Profile</a></li>
 
                                  <li th:if="${user.role== 'ROLE_USER' }"><a class="dropdown-item" href="/user/user-order">My Order</a></li>
-                                 <li><a class="dropdown-item" href="/logout">Logout</a></li>
+<!--                                 <li><a class="dropdown-item" href="/logout">Logout</a></li>-->
+                                 <li><form th:action="@{/auth/logout}" method="post" class="m-0 p-0">
+                                     <button type="submit" class="dropdown-item w-100 text-start bg-transparent border-0">
+                                         Logout
+                                     </button>
+                                 </form></li>
 
                              </ul>
                          </li>
@@ -216,7 +221,7 @@
                                  <p><i class="fas fa-phone pe-2"></i>+84 364554249</p>
                              </li>
                              <li>
-                                 <p><i class="fas fa-envelope pe-2 mb-0"></i> ptnhan@gmail.com</p>
+                                 <p><i class="fas fa-envelope pe-2 mb-0"></i> nhanpham.04122004@gmail.com</p>
                              </li>
                          </ul>
                      </div>
