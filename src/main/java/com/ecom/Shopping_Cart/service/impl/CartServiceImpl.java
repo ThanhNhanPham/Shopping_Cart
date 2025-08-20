@@ -25,7 +25,6 @@ public class CartServiceImpl implements CartService {
     @Autowired
     private ProductRepository productRepository;
 
-
     @Override
     public Cart saveCart(Integer productId, Integer userId) {
 
@@ -35,7 +34,6 @@ public class CartServiceImpl implements CartService {
         Cart cartStatus = cartRepository.findByProductIdAndUserId(productId, userId);
 
         Cart cart = null;
-
         if (ObjectUtils.isEmpty(cartStatus)) {
             cart = new Cart();
             cart.setProduct(product);
@@ -47,20 +45,18 @@ public class CartServiceImpl implements CartService {
             cart.setQuantity(cart.getQuantity() + 1);
             cart.setTotalPrice(cart.getQuantity() * cart.getProduct().getDiscountPrice());
         }
-        Cart saveCart = cartRepository.save(cart);
-
-        return saveCart;
+        return cartRepository.save(cart);
     }
 
     @Override
     public List<Cart> getCartByUser(int userId) {
         List<Cart> carts = cartRepository.findByUserId(userId);
 
-        Double totalOrderPrice = 0.0;
+        double totalOrderPrice = 0.0;
         List<Cart> updateCart = new ArrayList<>();
 
         for(Cart c : carts) {
-           Double totalPrice = (c.getProduct().getDiscountPrice() *c.getQuantity());
+           double totalPrice = (c.getProduct().getDiscountPrice() *c.getQuantity());
            c.setTotalPrice(totalPrice);
 
            totalOrderPrice += totalPrice;
@@ -68,23 +64,18 @@ public class CartServiceImpl implements CartService {
            updateCart.add(c);
 
         }
-
-
-
         return updateCart;
     }
 
     @Override
     public Integer getCountCart(Integer userId) {
-
-        Integer countUser= cartRepository.countByUserId(userId);
-
-        return countUser;
+        return cartRepository.countByUserId(userId);
     }
 
     @Override
     public void updateQuantity(String sy, int cid) {
-        Cart carts = cartRepository.findById(cid).get();
+        Cart carts = cartRepository.findById(cid)
+                .orElseThrow(() -> new RuntimeException("Cart not found with id: " + cid));
 
         int updateQuantity ;
         if(sy.equalsIgnoreCase("de")){

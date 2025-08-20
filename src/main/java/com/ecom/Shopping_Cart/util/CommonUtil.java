@@ -54,7 +54,7 @@ public class CommonUtil {
         helper.setFrom("6351071051@st.utc2.edu.vn","PTN Store");
         helper.setTo(order.getOrderAddress().getEmail());
 
-        msg=msg.replace("[[name]]",order.getOrderAddress().getFirstName()+""+order.getOrderAddress().getLastName());
+        msg=msg.replace("[[name]]",order.getOrderAddress().getFirstName()+" "+order.getOrderAddress().getLastName());
         msg=msg.replace("[[orderStatus]]",status);
         msg=msg.replace("[[productName]]",order.getProduct().getTitle());
         msg=msg.replace("[[category]]",order.getProduct().getCategory());
@@ -70,10 +70,8 @@ public class CommonUtil {
     }
 
     public UserDtls getLoggedInUserDetails(Principal p){
-
         String email = p.getName();
-        UserDtls userDtls = userService.getUserByEmail(email);
-        return userDtls;
+        return userService.getUserByEmail(email);
     }
 
 

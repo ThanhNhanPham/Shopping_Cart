@@ -26,8 +26,6 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-
-
     @Override
     @Transactional
     public Product saveProduct(Product product) {
@@ -54,8 +52,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getProductById(int id) {
-        Product product = productRepository.findById(id).orElse(null);
-        return product;
+        return productRepository.findById(id).orElse(null);
     }
 
 
@@ -90,9 +87,6 @@ public class ProductServiceImpl implements ProductService {
 
                     Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + "product_img" + File.separator
                             + image.getOriginalFilename());
-
-
-
                     Files.copy(image.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
                 }catch (Exception e){
                     e.printStackTrace();
@@ -112,8 +106,6 @@ public class ProductServiceImpl implements ProductService {
         }else{
             products=productRepository.findByCategory(category);
         }
-
-
         return products;
     }
 
@@ -160,7 +152,7 @@ public class ProductServiceImpl implements ProductService {
         Pageable pageable =PageRequest.of(pageNo,pageSize);
 
         Page<Product> pageProduct = null;//Đây là biến lưu kết quả các sản phẩm đã được phân trang, trả về dưới dạng Page
-        pageProduct= productRepository.findByisActiveTrueAndTitleContainingIgnoreCaseOrCategoryContainingIgnoreCase(ch,ch,pageable);
+        pageProduct = productRepository.findByisActiveTrueAndTitleContainingIgnoreCaseOrCategoryContainingIgnoreCase(ch,ch,pageable);
 
         return pageProduct;
 

@@ -1,14 +1,12 @@
 package com.ecom.Shopping_Cart.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.util.Date;
 
 
@@ -52,4 +50,7 @@ public class UserDtls {
     private Date lockTime;
 
     private String resetToken;
+
+    @Column(name="reset_token_expiry")
+    private Instant resetTokenExpiry;
 }

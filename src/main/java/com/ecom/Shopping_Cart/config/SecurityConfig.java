@@ -1,6 +1,6 @@
 package com.ecom.Shopping_Cart.config;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+
 import com.ecom.Shopping_Cart.security.JwtAuthFilter;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,8 +60,6 @@ public class SecurityConfig {
     //Lớp này được Spring Security sử dụng để xác thực thông tin đăng nhập của người dùng.
     @Bean
     public DaoAuthenticationProvider authenticationProvider(){
-        //Là một lớp cung cấp cơ chế xác thực dựa trên cơ sở dữ liệu
-        // hoặc bất kỳ nguồn nào sử dụng UserDetailsService
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
 
         authenticationProvider.setUserDetailsService(userDetailsService());
@@ -95,16 +93,20 @@ public SecurityFilterChain filterChain(HttpSecurity http,
     http
             .csrf(csrf -> csrf
                     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                    .ignoringRequestMatchers("/auth/**","/register","saveRegister"))
+                    .ignoringRequestMatchers("/auth/**","/register","/saveRegister","/forgot-password","/reset-password","user/**"))
             .cors(Customizer.withDefaults())
             .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/", "/signin", "/error", "/register","forgot-password","/auth/**",
-                            "/css/**","/js/**","/img/**","saveRegister").permitAll()
+                    .requestMatchers("/", "/signin", "/error", "/register","/forgot-password","/auth/**",
+                            "/css/**","/js/**","/img/**","/saveRegister","/reset-password","/product/**","products").permitAll()
                     .requestMatchers("/admin/**").hasRole("ADMIN")
                     .requestMatchers("/user/**").hasRole("USER")
                     .anyRequest().authenticated())
-            .formLogin(f -> f.disable())        // tránh cần import AbstractHttpConfigurer
+            .formLogin(form -> form
+                    .loginPage("/signin")
+                    .loginProcessingUrl("/login")
+                    .successHandler(authenticationSuccessHandler)
+                    .failureHandler(authFailureHandler))    // tránh cần import AbstractHttpConfigurer
             .httpBasic(b -> b.disable())
             .logout(l -> l.disable())
             .authenticationProvider(authenticationProvider)              // <- bật lại

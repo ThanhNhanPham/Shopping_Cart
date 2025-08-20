@@ -1,59 +1,74 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{base::layout(~{::section})}">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+    <meta charset="UTF-8">
+    <title>Login</title>
 </head>
 <body>
-         <section>
-          <div class="container mt-5 p-5">
-              <div class="row">
-              <div class="col-md-6 p-5">
-                  <img alt="" src="img/ecom.png" width="100%" height="400px">
-              </div>
+<section>
+    <div class="container mt-5 p-5">
+        <div class="row">
+            <div class="col-md-6 p-5">
+                <img alt="" src="img/ecom.png" width="100%" height="400px">
+            </div>
 
-              <div class="col-md-6 mt-3 p-5">
-                 <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
-                         <div class="card-header">
-                             <p class="fs-4 text-center">Login</p>
-                             <div th:if="${param.error}" class="alert alert-danger text-center">
-                                 [[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]
-                             </div>
+            <div class="col-md-6 mt-3 p-5">
+                <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
+                    <div class="card-header">
+                        <p class="fs-4 text-center">Login</p>
 
-                             <div th:if="${param.logout}" class="alert alert-success text-center">
-                                 Logout Success
-                             </div>
-                          </div>
+                        <!-- Thông báo lỗi login từ controller -->
+                        <div id="alert-box" th:if="${sucMsg}" class="alert alert-danger text-center">
+                            <span th:text="${sucMsg}"></span>
+                        </div>
 
-                         <div class="card-body">
-                             <form th:action="@{/auth/login}" method="post">
-                                 <div class="mb-3">
-                                     <label class="form-label">Email</label>
-                                     <input class="form-control" name="username" type="email">
-                                 </div>
+                        <!-- Thông báo lỗi mặc định từ Spring Security -->
+                        <div th:if="${param.error}" class="alert alert-danger text-center">
+                            [[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]
+                        </div>
 
-                                 <div class="mb-3">
-                                     <label class="form-label">Password</label>
-                                     <input class="form-control" name="password" type="password">
-                                 </div>
-                                 <button type="submit" class="btn bg-primary text-white col-md-12" >Đăng nhập</button>
-                             </form>
-                         </div>
+                        <!-- Thông báo logout -->
+                        <div th:if="${param.logout}" class="alert alert-success text-center">
+                            Logout Success
+                        </div>
+                    </div>
 
-                          <div class="card-footer text-center">
-                              <a href="/forgot-password" class="text-decoration-none">Forgot Password</a><br>
-                              Don't have an account? <a href="/register" class="text-decoration-none">Create one</a>
+                    <div class="card-body">
+                        <form th:action="@{/auth/login}" method="post">
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input class="form-control" name="username" type="email">
+                            </div>
 
-                          </div>
+                            <div class="mb-3">
+                                <label class="form-label">Password</label>
+                                <input class="form-control" name="password" type="password">
+                            </div>
+                            <button type="submit" class="btn bg-primary text-white col-md-12">Đăng nhập</button>
+                        </form>
+                    </div>
 
-              </div>
-
-          </div>
-      </div>
-          </div>
-
-     </section>
-
+                    <div class="card-footer text-center">
+                        <a href="/forgot-password" class="text-decoration-none">Forgot Password</a><br>
+                        Don't have an account? <a href="/register" class="text-decoration-none">Create one</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let alertBox = document.getElementById("alert-box");
+        if (alertBox) {
+            setTimeout(() => {
+                alertBox.style.transition = "opacity 1s ease";
+                alertBox.style.opacity = "0";
+                setTimeout(() => alertBox.remove(), 1000);
+            },3000);
+        }
+    });
+</script>

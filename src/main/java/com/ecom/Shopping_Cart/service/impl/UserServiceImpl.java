@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,12 +36,10 @@ public class UserServiceImpl implements UserService {
         user.setRole("ROLE_USER");
         user.setIsEnable(true);
         user.setAccountNonLocked(true);
-        String endcodePassword= passwordEncoder.encode(user.getPassword());
-        user.setPassword(endcodePassword);
+        String encodePassword= passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodePassword);
 
-        UserDtls savedUser = userRepository.save(user);
-
-        return savedUser;
+        return userRepository.save(user);
     }
 
     @Override
@@ -51,7 +50,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDtls> getAllUsers(String role) {
-
         return  userRepository.findByRole(role);
     }
 
@@ -129,8 +127,6 @@ public class UserServiceImpl implements UserService {
             updateUser=userRepository.save(updateUser);
         }
         try {
-
-
             if (!image.isEmpty()) {
                 //Luu vao duong dan hinh anh trong O D:/ sau khi nhan luu thong tin
                 File saveFile = new ClassPathResource("static/img").getFile();
@@ -158,11 +154,9 @@ public class UserServiceImpl implements UserService {
         user.setRole("ROLE_ADMIN");
         user.setIsEnable(true);
         user.setAccountNonLocked(true);
-        String endcodePassword= passwordEncoder.encode(user.getPassword());
-        user.setPassword(endcodePassword);
-
-        UserDtls savedUser = userRepository.save(user);
-        return savedUser;
+        String encodePassword= passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodePassword);
+        return userRepository.save(user);
     }
 
 
@@ -181,5 +175,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer countUser() {
         return userRepository.totalUsers();
+    }
+
+    @Override
+    @Transactional
+    public boolean resetPasswordByToken(String token, String rawPassword) {
+        UserDtls user = userRepository.findByResetToken(token).orElse(null);
+        if (user == null) return false;
+        // (tuỳ bạn) kiểm tra hết hạn:
+        // if (user.getResetTokenExpiry() == null || user.getResetTokenExpiry().isBefore(Instant.now())) return false;
+        user.setPassword(passwordEncoder.encode(rawPassword));
+        user.setResetToken(null);
+        user.setResetTokenExpiry(null);
+        userRepository.save(user);
+        return true;
     }
 }

@@ -2,6 +2,7 @@ package com.ecom.Shopping_Cart.service;
 
 import com.ecom.Shopping_Cart.model.OrderRequest;
 import com.ecom.Shopping_Cart.model.ProductOrder;
+import jakarta.persistence.criteria.Order;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -23,4 +24,5 @@ public interface OrderService {
 
     Double totalOrderRevenue();
 
+    Order createPendingOrder(Long userId, OrderRequest req);
 }

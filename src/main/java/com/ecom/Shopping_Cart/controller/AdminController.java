@@ -96,7 +96,6 @@ public class AdminController {
         return "admin/category";
     }
 
-
 //them moi category
     @PostMapping("/saveCategory")
     public String saveCategory(@ModelAttribute Category category, @RequestParam("file") MultipartFile file,
@@ -113,7 +112,6 @@ public class AdminController {
             session.setAttribute("errorMsg", "Tên danh mục đã tồn tại! Vui lòng nhập tên khác");
 
         } else {
-
             Category savedCategory = categoryService.saveCategory(category);
 
             if (ObjectUtils.isEmpty(savedCategory)) {
@@ -143,7 +141,7 @@ public class AdminController {
     public String deleteCategory(@PathVariable("id") int id, HttpSession session) {
         Boolean deleteCategory = categoryService.deleteCategory(id);
         if (deleteCategory) {
-            session.setAttribute("sucMsg", "Xóa thành công!");
+            session.setAttribute("sucMsg", "Xóa thành công rồi nhé!");
         } else {
             session.setAttribute("errorMsg", "Có lỗi trên server");
         }

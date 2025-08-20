@@ -52,7 +52,7 @@ INSERT INTO `category` (`id`, `image_name`, `is_active`, `name`) VALUES
 	(7, 'laptop1.png', b'1', 'Latop'),
 	(9, 'shirt.png', b'1', 'Clothes'),
 	(13, 'oppoa3.jpg', b'1', 'Mobile Phone'),
-	(14, 'shoes.jpg', b'1', 'Shoes'),
+	(14, 'nike.jpg', b'1', 'Shoes'),
 	(15, 'watches1.jpg', b'1', 'Watches'),
 	(16, 'guccy1.jpg', b'1', 'Asseccory');
 

@@ -1,6 +1,7 @@
 package com.ecom.Shopping_Cart.service;
 
 import com.ecom.Shopping_Cart.model.UserDtls;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -34,4 +35,6 @@ public interface UserService {
     void updateUserResetToken(String email,String resetToken);
 
     Integer countUser();
+    @Transactional
+    boolean resetPasswordByToken(String token, String newPassword);
 }

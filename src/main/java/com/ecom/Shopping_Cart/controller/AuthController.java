@@ -17,8 +17,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.net.URI;
 import java.time.Duration;
 
 @RestController
@@ -29,33 +30,50 @@ public class AuthController {
     private final JwtUtil jwtUtil;
     private final UserTokenService tokenService;
     private final UserService userService;
-
     @PostMapping("/login")
     public ResponseEntity<Void> login(@RequestParam("username") String email,
                                       @RequestParam String password,
                                       HttpServletRequest req,
-                                      HttpServletResponse resp) {
-        Authentication auth = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(email, password));
-        UserDetails user = (UserDetails) auth.getPrincipal();
-        UserDtls userEntity = userService.getUserByEmail(user.getUsername());
-        String access = jwtUtil.generateAccessToken(user);
-        String refresh = jwtUtil.generateRefreshToken(user);
+                                      HttpServletResponse resp,
+                                      RedirectAttributes ra) {
+        try {
+            Authentication auth = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(email, password));
+            UserDetails user = (UserDetails) auth.getPrincipal();
+            UserDtls userEntity = userService.getUserByEmail(user.getUsername());
 
-        // Lưu refresh token (hash) vào DB
-        tokenService.store(
-                userEntity,
-                TokenType.REFRESH,
-                jwtUtil.extractJti(refresh),
-                refresh,
-                req.getHeader("User-Agent"),
-                req.getRemoteAddr(),
-                jwtUtil.toInstant(jwtUtil.extractExpiration(refresh))
-        );
-        addCookie(resp, "accessToken", access, "/", Duration.ofSeconds(900));
-        addCookie(resp, "refreshToken", refresh, "/auth", Duration.ofDays(30));
-        var location = java.net.URI.create("/");
-        return ResponseEntity.status(HttpStatus.FOUND).location(location).build();
+            String access = jwtUtil.generateAccessToken(user);
+            String refresh = jwtUtil.generateRefreshToken(user);
+
+            // Lưu refresh token (hash) vào DB
+            tokenService.store(
+                    userEntity,
+                    TokenType.REFRESH,
+                    jwtUtil.extractJti(refresh),
+                    refresh,
+                    req.getHeader("User-Agent"),
+                    req.getRemoteAddr(),
+                    jwtUtil.toInstant(jwtUtil.extractExpiration(refresh))
+            );
+            addCookie(resp, "accessToken", access, "/", Duration.ofSeconds(900));
+            addCookie(resp, "refreshToken", refresh, "/auth", Duration.ofDays(30));
+
+            // Đăng nhập thành công → redirect về trang chủ
+            return ResponseEntity.status(HttpStatus.FOUND)
+                    .location(URI.create("/"))
+                    .build();
+
+        } catch (org.springframework.security.authentication.BadCredentialsException e) {
+            ra.addFlashAttribute("sucMsg", "Sai username hoặc password");
+            return ResponseEntity.status(HttpStatus.FOUND)
+                    .location(URI.create("/signin"))
+                    .build();
+        } catch (Exception e) {
+            // Trường hợp lỗi khác → redirect về signin kèm param generic error
+            return ResponseEntity.status(HttpStatus.FOUND)
+                    .location(URI.create("/signin?error=server"))
+                    .build();
+        }
     }
     @PostMapping("/refresh")
     public ResponseEntity<Void> refresh(@CookieValue(value = "refreshToken", required = false) String rt,

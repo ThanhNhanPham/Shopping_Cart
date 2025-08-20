@@ -9,6 +9,7 @@ import com.ecom.Shopping_Cart.repository.ProductOrderRepository;
 import com.ecom.Shopping_Cart.service.OrderService;
 import com.ecom.Shopping_Cart.util.CommonUtil;
 import com.ecom.Shopping_Cart.util.OrderStatus;
+import jakarta.persistence.criteria.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -68,8 +69,6 @@ public class OrderServiceImpl implements OrderService {
             ProductOrder saveOrder = productOrderRepository.save(order);
             commonUtil.sendEmailForProductOrder(saveOrder,"success");
 
-
-
         }
 
 
@@ -77,8 +76,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<ProductOrder> getOrderByUser(int userId) {
-        List<ProductOrder> orderUser = productOrderRepository.findByUserId(userId);
-        return orderUser;
+        return productOrderRepository.findByUserId(userId);
     }
 
     @Override
@@ -87,8 +85,7 @@ public class OrderServiceImpl implements OrderService {
         if(findById.isPresent()) {
             ProductOrder order = findById.get();
             order.setStatus(status);
-            ProductOrder saveOrder = productOrderRepository.save(order);
-            return saveOrder;
+            return  productOrderRepository.save(order);
         }
         return null;
     }
@@ -118,5 +115,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Double totalOrderRevenue() {
         return productOrderRepository.totalOrderRevenue();
+    }
+
+    @Override
+    public Order createPendingOrder(Long userId, OrderRequest req) {
+        return null;
     }
 }

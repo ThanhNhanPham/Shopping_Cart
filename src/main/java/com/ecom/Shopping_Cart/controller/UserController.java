@@ -7,7 +7,8 @@ import com.ecom.Shopping_Cart.service.OrderService;
 import com.ecom.Shopping_Cart.service.UserService;
 import com.ecom.Shopping_Cart.util.CommonUtil;
 import com.ecom.Shopping_Cart.util.OrderStatus;
-import jakarta.persistence.EntityNotFoundException;
+
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,7 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.util.List;
@@ -123,8 +123,7 @@ public class UserController {
 
     private UserDtls getLoggedInUserDetails(Principal p) {
         String email = p.getName();
-        UserDtls userDtls = userService.getUserByEmail(email);
-        return userDtls;
+        return userService.getUserByEmail(email);
     }
 
     // update tang so luong va giam so luong san pham o trong gio hang
@@ -154,7 +153,7 @@ public class UserController {
 
 
     //Thêm thông tin nguoi mua va bao gom mat hang khi order san pham xuong data ProductOrder
-    @PostMapping("/save-oder")
+    @PostMapping("/save-order")
     public  String saveOder(@ModelAttribute OrderRequest request,Principal p) throws Exception {
 //        System.out.println(request);
         UserDtls user = getLoggedInUserDetails(p);
@@ -162,6 +161,14 @@ public class UserController {
         return "/user/success";
     }
 
+    // Lấy IP client (phục vụ vnp_IpAddr)
+    private String getClientIp(HttpServletRequest request) {
+        String ip = request.getHeader("X-Forwarded-For");
+        if (ip == null || ip.isBlank()) ip = request.getRemoteAddr();
+        // Nếu có nhiều IP (proxy), lấy IP đầu tiên
+        int comma = ip.indexOf(',');
+        return (comma > 0) ? ip.substring(0, comma).trim() : ip;
+    }
 
 
     //Load thong tin khach khi da order san pham can thanh toan len view my_order

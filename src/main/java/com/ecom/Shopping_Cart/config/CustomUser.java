@@ -4,12 +4,11 @@ import com.ecom.Shopping_Cart.model.UserDtls;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 public class CustomUser implements UserDetails {
-    private UserDtls user;
+    private final UserDtls user;
 
     public CustomUser(UserDtls user) {
         this.user = user;
@@ -18,7 +17,7 @@ public class CustomUser implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());
-    return Arrays.asList(authority);
+    return List.of(authority);
     }
 
     @Override
