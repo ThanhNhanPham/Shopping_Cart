@@ -1,0 +1,2555 @@
+/****************************************************************************
+*********************Elite Addons For Elementor Styles***********************
+*****************************************************************************
+
+01. Advanced Heading
+02. Image Animation
+03. Pricing Box
+04. Content Switcher
+05. Post & Page Pro
+06. Contact Form 7
+07. Image Pointer
+08. Icon List
+09. Instagram Feed
+10. Countdown Clock
+11. Compare Images
+12. Advanced Tab
+13. Counter
+
+
+
+/*---------------------------------------*/
+/*-------- 01. Advanced Heading------------
+/*---------------------------------------*/
+
+/**********Advance heading with line***********/
+.elaet-module-content.elaet-divider-main .elaet-divider {
+  width: 20%;
+  border-top-style: solid;
+}
+.elaet-heading span.elaet-heading-text {
+  margin: 0px 0px 0px 0px;
+}
+.elaet-module-content.elaet-heading-wrapper .elaet-description {
+  margin: 0px 0px 0px 0px;
+}
+
+.elaet-module-content.unet-divider-main .elaet-divider-wrap,
+.elaet-module-content.elaet-divider-main .elaet-divider {
+  display: inline-block;
+}
+/**********Advance heading with icon in divider***********/
+
+.elaet-left-line {
+  width: 50%;
+}
+.elaet-divider-line {
+  display: table-cell;
+  vertical-align: middle;
+}
+.elaet-divider-line.elaet-left-line span {
+  border-top-style: solid;
+  border-top-width: 2px;
+}
+.elaet-divider-line > span {
+  display: block;
+  margin-top: 0;
+}
+.elaet-module-content.elaet-divider-main .elaet-divider-wrap {
+  width: 20%;
+}
+.elaet-divider-content {
+  padding: 0px 10px 0px 10px;
+}
+.elaet-divider-content {
+  display: table-cell;
+}
+.elaet-divider-content .elaet-icon-wrap {
+  display: block;
+}
+.elaet-icon-wrap .elaet-icon {
+  height: 28px;
+  width: 28px;
+  line-height: 28px;
+}
+.elaet-icon-wrap .elaet-icon i {
+  font-size: 28px;
+  height: 28px;
+  width: 28px;
+  line-height: 28px;
+  text-align: center;
+}
+.elaet-right-line {
+  width: calc(100% - 50%);
+}
+.elaet-divider-line.elaet-right-line span {
+  border-top-style: solid;
+  border-top-width: 2px;
+}
+
+/**********Advance heading with image in divider***********/
+.elaet-module-content .elaet-image-content {
+  line-height: 0;
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+.elaet-image-content img {
+  display: inline;
+  height: auto !important;
+  max-width: 100%;
+  width: auto;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  -webkit-border-radius: inherit;
+  border-radius: inherit;
+}
+.elaet-image-content .elaet-photo-img {
+  min-width: 70px;
+}
+.elaet-module-content .elaet-divider-wrap {
+  -js-display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.elaet-heading-align-right .elaet-divider-wrap {
+  margin-left: auto;
+  margin-right: 0;
+}
+.elaet-heading-align-center .elaet-divider-wrap {
+  margin-left: auto;
+  margin-right: auto;
+}
+.elaet-heading-align-left .elaet-divider-wrap {
+  margin-left: 0;
+  margin-right: auto;
+}
+/**********Advance heading with text in divider***********/
+.elaet-divider-text {
+  white-space: nowrap;
+  margin: 0;
+}
+
+/*---------------------------------------*/
+/*-------- 02. Image Animation------------
+/*---------------------------------------*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+.elaet-image-module-wrap img {
+  display: block;
+  overflow: hidden;
+}
+
+.elaet-image-module img {
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0) scale(1, 1);
+}
+.elaet-image-module.elaet-image-blur:hover img,
+.elaet-image-sepia:hover img,
+.elaet-image-module.elaet-image-grayscale-reverse:hover img {
+  -webkit-filter: none;
+  filter: none;
+}
+/**********Blur image***********/
+.elaet-image-module.elaet-image-blur img {
+  -webkit-filter: blur(5px);
+  filter: blur(5px);
+}
+/**********sepia image***********/
+.elaet-image-sepia img {
+  -webkit-filter: sepia(1);
+  -ms-filter: sepia(100%);
+  filter: url(data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter i…5 0.3333 0.3333 0 0 0.3 0.3 0.3 0 0 0 0 0 1 0\'/></filter></svg>#grayscale);
+  filter: sepia(100%);
+}
+/**********grayscale-reverse image***********/
+.elaet-image-module.elaet-image-grayscale-reverse img {
+  -webkit-filter: grayscale(1);
+  filter: url(data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter i…0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale);
+  filter: gray;
+  filter: grayscale(1);
+}
+/**********grayscale image***********/
+.elaet-image-module.elaet-image-grayscale:hover img {
+  -webkit-filter: grayscale(1);
+  filter: url(data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter i…0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale);
+  filter: gray;
+  filter: grayscale(1);
+}
+
+/**
+ * Image Effects module
+ */
+
+/*** Image Flip **/
+
+.elaet-image-module .elaet-image-module-wrap {
+  position: relative;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+.elaet-image-module .image-pro-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  visibility: hidden;
+}
+.elaet-image-module .elaet-image-overlay-inner {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  right: 5%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.elaet-image-module .elaet-image-color-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: opacity 0.5s;
+}
+.elaet-image-module:not(.entrance-effect-partial-overlay)
+  .elaet-image-color-overlay {
+  opacity: 0; /* will show on hover */
+}
+.elaet-image-module:hover .elaet-image-color-overlay {
+  opacity: 1;
+}
+.elaet-image-module .elaet-image-title,
+.elaet-image-module .elaet-image-caption {
+  color: #fff;
+  margin: 0 0 1em 0;
+  padding: 0;
+}
+.elaet-image-module .elaet-image-title,
+.elaet-image-module .elaet-image-caption,
+.elaet-image-module .elaet-image-action-button {
+  position: relative;
+  left: -100%;
+  opacity: 0;
+  transition: all 0.2s;
+}
+.elaet-image-module .elaet-image-action-button {
+  padding: 0.4em 1em;
+  line-height: 1.2em;
+  border: none;
+}
+.elaet-image-module .builder_button.elaet-image-action-button.outline {
+  background: none;
+  border: 2px solid #fff;
+  color: #fff;
+}
+.elaet-image-module .builder_button.elaet-image-action-button.white {
+  background: #fff;
+  color: #000;
+}
+.elaet-image-module .builder_button.elaet-image-action-button.outline:before,
+.elaet-image-module .builder_button.elaet-image-action-button.default:before {
+  display: none;
+}
+.elaet-image-module-wrap .elaet-image-caption-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.elaet-image-module-wrap
+  .elaet-image-caption-wrapper
+  .elaet-image-caption-inner {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  right: 5%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.elaet-image-module .elaet-image-module-wrap:hover .elaet-image-title,
+.elaet-image-module .elaet-image-module-wrap:hover .elaet-image-caption,
+.elaet-image-module .elaet-image-module-wrap:hover .elaet-image-action-button {
+  left: 0;
+  opacity: 1;
+}
+.elaet-image-module .elaet-image-title {
+  transition-delay: 0.2s;
+}
+.elaet-image-module .elaet-image-caption {
+  transition-delay: 0.35s;
+}
+.elaet-image-module .elaet-image-action-button {
+  transition-delay: 0.5s;
+}
+
+/**
+ * Image Appearance
+ */
+.elaet-image-module.rounded .elaet-image-flip-box,
+.elaet-image-module.circle .elaet-image-flip-box {
+  overflow: hidden;
+}
+.elaet-image-module.rounded .elaet-elaet-image-flip-box-wrap,
+.elaet-image-module.rounded img,
+.elaet-image-module.rounded .elaet-image-flip-box,
+.elaet-image-module.rounded .image-pro-overlay {
+  border-radius: 1em;
+}
+.elaet-image-module.circle .elaet-image-module-wrap,
+.elaet-image-module.circle img,
+.elaet-image-module.circle .elaet-image-flip-box,
+.elaet-image-module.circle .image-pro-overlay {
+  border-radius: 100%;
+}
+.elaet-image-module .elaet-image-module-wrap {
+  display: inline-block !important; /* keep important for better compatibility */
+  text-align: center;
+}
+.elaet-image-module.image_alignment_left {
+  float: left;
+}
+.elaet-image-module {
+  float: none;
+  text-align: center;
+}
+.elaet-image-module.image_alignment_right {
+  float: right;
+}
+
+/*
+ * Filters
+ */
+.elaet-image-module.filter-grayscale .elaet-image-module-wrap:hover img,
+.elaet-image-module.filter-grayscale-reverse img {
+  -webkit-filter: grayscale(1);
+  filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale");
+  filter: gray;
+  filter: grayscale(1);
+}
+.elaet-image-module.filter-sepia img {
+  -webkit-filter: sepia(1);
+  -ms-filter: sepia(100%);
+  filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.5 0.5 0.4 0 0 0.5 0.3333 0.3333 0 0 0.3 0.3 0.3 0 0 0 0 0 1 0'/></filter></svg>#grayscale");
+  filter: sepia(100%);
+}
+.elaet-image-module.filter-blur img {
+  -webkit-filter: blur(5px);
+  filter: blur(5px);
+}
+.elaet-image-module.filter-sepia .elaet-image-module-wrap:hover img,
+.elaet-image-module.filter-blur .elaet-image-module-wrap:hover img,
+.elaet-image-module.filter-grayscale .elaet-image-module-wrap img,
+.elaet-image-module.filter-grayscale-reverse
+  .elaet-image-module-wrap:hover
+  img {
+  -webkit-filter: none;
+  filter: none;
+}
+
+/**
+ * Image Effects
+ */
+.elaet-image-module img {
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+.elaet-image-module.effect-zoomin img {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+.elaet-image-module.effect-zoomin .elaet-image-module-wrap:hover img {
+  -webkit-transform: scale(1.3);
+  transform: scale(1.3);
+}
+.elaet-image-module.effect-zoomout img {
+  -webkit-transform: scale(1.3);
+  transform: scale(1.3);
+}
+.elaet-image-module.effect-rotate img {
+  -webkit-transform: rotate(15deg) scale(1.4);
+  transform: rotate(15deg) scale(1.4);
+}
+.elaet-image-module.effect-rotate:not([class*="entrance-effect-flip-"])
+  .image-pro-wrap:hover
+  img {
+  -webkit-transform: rotate(0) scale(1);
+  transform: rotate(0) scale(1);
+}
+.elaet-image-module.effect-zoomout .elaet-image-module-wrap:hover img {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+.elaet-image-module.effect-rotate:not([class*="entrance-effect-flip-"])
+  .elaet-image-module-wrap:hover
+  img {
+  -webkit-transform: rotate(0) scale(1);
+  transform: rotate(0) scale(1);
+}
+.elaet-image-module.effect-shine .elaet-image-flip-box::before {
+  position: absolute;
+  top: 0;
+  left: -75%;
+  z-index: 12;
+  display: block;
+  content: "";
+  width: 50%;
+  height: 100%;
+  background: -webkit-linear-gradient(
+    left,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  -webkit-transform: skewX(-25deg);
+  transform: skewX(-25deg);
+}
+.elaet-image-module.effect-shine
+  .elaet-image-module-wrap:hover
+  .elaet-image-flip-box::before {
+  -webkit-animation: image-pro-shine 0.75s;
+  animation: image-pro-shine 0.75s;
+}
+.elaet-image-module.effect-shine.circle .elaet-image-module-wrap {
+  border-radius: 100%;
+}
+.elaet-image-module.effect-shine.circle .elaet-image-module-wrap {
+  display: inline-block;
+}
+
+@-webkit-keyframes image-pro-shine {
+  100% {
+    left: 125%;
+  }
+}
+@keyframes image-pro-shine {
+  100% {
+    left: 125%;
+  }
+}
+.elaet-image-module.effect-glow .elaet-image-module-wrap::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  display: block;
+  content: "";
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 100%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
+.elaet-image-module.effect-glow .elaet-image-module-wrap:hover::before {
+  -webkit-animation: image-pro-glow 0.75s;
+  animation: image-pro-glow 0.75s;
+}
+@-webkit-keyframes image-pro-glow {
+  0% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    width: 200%;
+    height: 200%;
+    opacity: 0;
+  }
+}
+@keyframes image-pro-glow {
+  0% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    width: 200%;
+    height: 200%;
+    opacity: 0;
+  }
+}
+
+.elaet-image-module .elaet-elaet-image-flip-box-wrap {
+  position: relative;
+  width: 100%;
+  -webkit-perspective: 1000px;
+  -moz-perspective: 1000px;
+  -o-perspective: 1000px;
+  -ms-perspective: 1000px;
+  perspective: 1000px;
+  overflow: hidden;
+}
+.elaet-image-module .elaet-image-flip-box {
+  position: relative;
+  display: block;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transition: 750ms;
+  -moz-transition: 750ms;
+  -o-transition: 750ms;
+  -ms-transition: 750ms;
+  transition: 750ms;
+}
+.elaet-image-module .elaet-image-flip-box > img,
+.elaet-image-module .image-pro-overlay {
+  overflow: hidden;
+  margin-bottom: 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  z-index: 11;
+  background-position: center;
+  background-size: cover;
+}
+.elaet-image-module .image-pro-overlay {
+  visibility: hidden;
+}
+
+.elaet-image-module:hover .image-pro-overlay {
+  visibility: visible !important;
+}
+
+/* Horizontal Flip */
+.elaet-image-module.entrance-effect-flip-horizontal
+  .elaet-elaet-image-flip-box-wrap {
+  overflow: visible;
+}
+.elaet-image-module.entrance-effect-flip-horizontal img,
+.elaet-image-module.entrance-effect-flip-horizontal .image-pro-overlay {
+  -webkit-transition: 750ms;
+  -moz-transition: 750ms;
+  -o-transition: 750ms;
+  -ms-transition: 750ms;
+  transition: 750ms;
+}
+.elaet-image-module.entrance-effect-flip-horizontal:not(.effect-rotate) img {
+  -webkit-transform: rotateY(0deg);
+  -moz-transform: rotateY(0deg);
+  -ms-transform: rotateY(0deg);
+  -o-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+}
+.elaet-image-module.entrance-effect-flip-horizontal .image-pro-overlay {
+  -webkit-transform: rotateY(-180deg);
+  -moz-transform: rotateY(-180deg);
+  -ms-transform: rotateY(-180deg);
+  -o-transform: rotateY(-180deg);
+  transform: rotateY(-180deg);
+}
+.elaet-image-module.entrance-effect-flip-horizontal.image-pro-flip img {
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+.elaet-image-module.entrance-effect-flip-horizontal.image-pro-flip
+  .image-pro-overlay {
+  -webkit-transform: rotateY(0deg);
+  -moz-transform: rotateY(0deg);
+  -ms-transform: rotateY(0deg);
+  -o-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+}
+
+/* Vertical Flip */
+.elaet-image-module.entrance-effect-flip-vertical .tile-flip-box-wrap {
+  overflow: visible;
+}
+.elaet-image-module.entrance-effect-flip-vertical img,
+.elaet-image-module.entrance-effect-flip-vertical .image-pro-overlay {
+  -webkit-transition: 750ms;
+  -moz-transition: 750ms;
+  -o-transition: 750ms;
+  -ms-transition: 750ms;
+  transition: 750ms;
+}
+.elaet-image-module.entrance-effect-flip-vertical:not(.effect-rotate) img {
+  -webkit-transform: rotateX(0deg);
+  -moz-transform: rotateX(0deg);
+  -ms-transform: rotateX(0deg);
+  -o-transform: rotateX(0deg);
+  transform: rotateX(0deg);
+}
+.elaet-image-module.entrance-effect-flip-vertical .image-pro-overlay {
+  -webkit-transform: rotateX(-180deg);
+  -moz-transform: rotateX(-180deg);
+  -ms-transform: rotateX(-180deg);
+  -o-transform: rotateX(-180deg);
+  transform: rotateX(-180deg);
+}
+.elaet-image-module.entrance-effect-flip-vertical.image-pro-flip img {
+  -webkit-transform: rotateX(180deg);
+  -moz-transform: rotateX(180deg);
+  -ms-transform: rotateX(180deg);
+  -o-transform: rotateX(180deg);
+  transform: rotateX(180deg);
+}
+.elaet-image-module.entrance-effect-flip-vertical.image-pro-flip
+  .image-pro-overlay {
+  -moz-transform: rotateX(0deg);
+  -ms-transform: rotateX(0deg);
+  -o-transform: rotateX(0deg);
+  -webkit-transform: rotateX(0deg);
+  transform: rotateX(0deg);
+}
+.elaet-image-module .image-pro-overlay.animated,
+.elaet-image-module.entrance-effect-flip-vertical .image-pro-overlay,
+.elaet-image-module.entrance-effect-flip-horizontal .image-pro-overlay {
+  visibility: visible;
+}
+
+/* partial overlay */
+.elaet-image-module.entrance-effect-partial-overlay .image-pro-overlay {
+  visibility: visible;
+  top: 80%;
+  display: block;
+  transition: 0.3s;
+}
+.elaet-image-module.entrance-effect-partial-overlay.circle
+  .elaet-image-flip-box {
+  overflow: hidden;
+  border-radius: 100%;
+}
+.elaet-image-module.entrance-effect-partial-overlay.rounded
+  .elaet-image-flip-box {
+  overflow: hidden;
+  border-radius: 1em;
+}
+.elaet-image-module.entrance-effect-partial-overlay .elaet-image-overlay-inner {
+  top: 5%;
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
+}
+.elaet-image-module.entrance-effect-partial-overlay
+  .elaet-image-module-wrap:hover
+  .elaet-image-overlay-inner {
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.elaet-image-module.entrance-effect-partial-overlay .elaet-image-title,
+.elaet-image-module.entrance-effect-partial-overlay .elaet-image-caption,
+.elaet-image-module.entrance-effect-partial-overlay .elaet-image-action-button {
+  left: 0;
+  opacity: 1;
+}
+.elaet-image-module.entrance-effect-partial-overlay
+  .elaet-image-module-wrap:hover
+  .image-pro-overlay {
+  top: 0;
+}
+.elaet-image-module.entrance-effect-partial-overlay .elaet-image-caption,
+.elaet-image-module.entrance-effect-partial-overlay .elaet-image-action-button {
+  opacity: 0;
+}
+.elaet-image-module.entrance-effect-partial-overlay
+  .elaet-image-module-wrap:hover
+  .elaet-image-caption,
+.elaet-image-module.entrance-effect-partial-overlay
+  .elaet-image-module-wrap:hover
+  .elaet-image-action-button {
+  opacity: 1;
+}
+.elaet-image-module.entrance-effect-none .image-pro-overlay {
+  visibility: visible !important;
+}
+.elaet-image-module.entrance-effect-none .image-pro-overlay .elaet-image-title,
+.elaet-image-module.entrance-effect-none
+  .image-pro-overlay
+  .elaet-image-caption,
+.elaet-image-module.entrance-effect-none
+  .image-pro-overlay
+  .elaet-image-action-button {
+  left: 0;
+  opacity: 1;
+}
+.elaet-image-module-external {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.elaet-image-module-external + .elaet-elaet-image-flip-box-wrap {
+  pointer-events: none;
+}
+.elaet-image-module
+  .elaet-image-module-external
+  + .elaet-elaet-image-flip-box-wrap
+  .elaet-image-action-button {
+  pointer-events: auto;
+}
+
+/* Mobile fix overlay */
+.elaet-image-module .elaet-image-title {
+  will-change: opacity, left;
+}
+.elaet-image-module:not(.entrance-effect-partial-overlay)
+  .elaet-image-module-wrap:not(:hover)
+  .image-pro-overlay {
+  visibility: hidden;
+  opacity: 0;
+}
+.elaet-image-module.entrance-effect-none
+  .elaet-image-module-wrap:not(:hover)
+  .image-pro-overlay {
+  visibility: visible;
+}
+
+/** Default color code **/
+.elaet-image-caption-title,
+.elaet-image-overlay-inner .elaet-image-title {
+  color: #fff;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+.elaet-image-caption-wrapper .elaet-image-caption-desc,
+.elaet-image-overlay-inner .elaet-image-caption-desc {
+  color: #fff;
+  margin-bottom: 20px;
+}
+.elaet-image-caption-button,
+.elaet-image-action-button {
+  color: #000;
+  background: #fff;
+  border-radius: 2px;
+  padding: 5px 20px 5px 20px;
+}
+
+/*---------------------------------------*/
+/*-------- 03. Pricing Box----------+-----
+/*---------------------------------------*/
+
+.elementor-widget-elaet-price-table .elementor-widget-container {
+  overflow: hidden;
+  background-color: red;
+}
+.elementor-widget-elaet-price-table:hover {
+  z-index: 9;
+}
+.elaet-price-table-feature-content {
+  -js-display: inline-flex;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -moz-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.elaet-price-features-simple .elaet-price-table-feature-content {
+  padding: 10px 20px;
+}
+.elaet-price-features-divider .elaet-price-table-feature-content,
+.elaet-price-features-strips .elaet-price-table-feature-content,
+.elaet-price-features-borderbox .elaet-price-table-feature-content {
+  padding: 15px 20px;
+}
+.elaet-pricing-style-0 .elaet-price-table-header,
+.elaet-pricing-style-1 .elaet-price-table-header,
+.elaet-pricing-style-2 .elaet-price-table-header,
+.elaet-pricing-style-3 .elaet-pricing-heading-wrap,
+.elaet-pricing-style-5 .elaet-price-table-header {
+  padding: 20px;
+}
+
+.elaet-pricing-style-4 .elaet-price-table-header {
+  padding: 20px 20px 10px 20px;
+}
+.elaet-pricing-style-0 .elaet-price-table-price-wrap {
+  padding: 10px 20px 20px 20px;
+}
+.elaet-pricing-style-1 .elaet-price-table-price-wrap {
+  padding: 40px 20px;
+}
+.elaet-pricing-style-5 .elaet-price-table-price-wrap {
+  padding: 35px 20px 10px 20px;
+}
+.elaet-pricing-style-4 .elaet-price-table-price-wrap {
+  padding: 30px 20px 0px 20px;
+}
+.elaet-module-content.elaet-price-table-container {
+  position: relative;
+}
+.elaet-price-table {
+  text-align: center;
+}
+.elaet-price-table .elaet-price-table-heading {
+  margin: 0;
+  padding: 0;
+}
+.elaet-pricing-duration {
+  padding: 0px 4px;
+}
+.elaet-price-table .elaet-price-table-original-price {
+  margin-right: 15px;
+  text-decoration: line-through;
+  font-size: 0.5em;
+  line-height: 1;
+  font-weight: 400;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+.elaet-price-table .elaet-pricing-value {
+  color: #555;
+  font-weight: 600;
+  font-size: 65px;
+}
+.elaet-price-table .elaet-price-table-pricing .elaet-price-typo-excluded {
+  line-height: initial;
+  letter-spacing: initial;
+  text-transform: initial;
+  font-weight: initial;
+  font-size: initial;
+  font-style: initial;
+}
+.elaet-price-table .elaet-price-table-beside-price {
+  -js-display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: left;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -moz-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -moz-box-orient: vertical;
+  -moz-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+.elaet-pricing-container {
+  line-height: 1em;
+  display: inline-block;
+  vertical-align: middle;
+}
+.elaet-price-table .elaet-price-table-integer-part,
+.elaet-price-table .elaet-price-currency-normal {
+  line-height: 1em;
+}
+.elaet-price-table .elaet-price-table-currency,
+.elaet-price-table .elaet-price-table-fractional-part {
+  line-height: 1.2em;
+  font-size: 0.4em;
+}
+.elaet-price-table .elaet-price-table-currency {
+  margin-right: 2px;
+}
+.elaet-price-table .elaet-price-table-beside-price {
+  margin-left: 2px;
+}
+.elaet-price-table .elaet-price-table-duration {
+  width: 100%;
+  font-size: 13px;
+  font-weight: 400;
+}
+.elaet-price-table .elaet-price-table-features-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+.elaet-price-table .elaet-price-table-features-list i {
+  margin-right: 10px;
+  font-size: 1em;
+}
+
+li[class^="elementor-repeater-item"] {
+  margin: 0;
+}
+.elaet-price-table .elaet-price-table-cta {
+  padding: 40px 20px;
+}
+.elaet-price-table .elaet-price-table-disclaimer {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.elaet-price-features-divider
+  .elaet-price-table-features-list
+  li:not(:first-child):before,
+.elaet-price-features-borderbox .elaet-price-table-features-list li:before,
+.elaet-price-features-borderbox
+  .elaet-price-table-features-list
+  li:last-child:after {
+  content: "";
+  display: block;
+  border: 0 solid rgba(122, 122, 122, 0.3);
+}
+
+/* CSS for Style 2 */
+.elaet-pricing-style-2 .elaet-price-table .elaet-price-table-price-wrap {
+  padding: 30px 20px;
+}
+.elaet-pricing-style-2 .elaet-price-table .elaet-price-table-cta {
+  padding: 30px 20px;
+}
+.elaet-pricing-style-2 .elaet-pricing-value {
+  font-size: 50px;
+}
+.elaet-pricing-style-2 .elaet-price-table .elaet-price-table-features-list {
+  padding: 20px 0px;
+}
+.elaet-pricing-style-2 .elementor-button {
+  -webkit-border-radius: 40px;
+  border-radius: 40px;
+}
+
+/* CSS for Card style 3 of price section */
+.elaet-price-table-price-wrap,
+.elaet-pricing-value {
+  -js-display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -moz-box-orient: horizontal;
+  -moz-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+.elaet-pricing-style-3 .elaet-price-table-pricing {
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  background-color: #eaeaea;
+  border-color: #f9f9f9;
+}
+.elaet-pricing-style-3 .elaet-price-table .elaet-pricing-value {
+  font-size: 40px;
+}
+.elaet-pricing-style-3 .elaet-price-table .elaet-price-table-features-list {
+  padding: 20px 0px 0px 0px;
+}
+
+/* CSS for Ribbon Style 1 */
+.elaet-price-table-ribbon-1 {
+  position: absolute;
+  top: 0;
+  left: auto;
+  right: 0;
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  width: 15em;
+  overflow: hidden;
+  height: 15em;
+}
+.elaet-price-table-ribbon-1 .elaet-price-table-ribbon-content {
+  text-align: center;
+  left: 0;
+  width: 150%;
+  -webkit-transform: translateY(-50%) translateX(-50%) translateX(35px)
+    rotate(-45deg);
+  -ms-transform: translateY(-50%) translateX(-50%) translateX(35px)
+    rotate(-45deg);
+  transform: translateY(-50%) translateX(-50%) translateX(35px) rotate(-45deg);
+  margin-top: 35px;
+  font-size: 13px;
+  line-height: 2;
+  font-weight: 800;
+  text-transform: uppercase;
+  background: #000;
+}
+.elaet-price-table-ribbon-1.elaet-ribbon-left {
+  -webkit-transform: rotate(0);
+  -ms-transform: rotate(0);
+  transform: rotate(0);
+  left: 0;
+  right: auto;
+}
+.elaet-price-table-ribbon-1.elaet-ribbon-right {
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  left: auto;
+  right: 0;
+}
+
+/* CSS for Ribbon Style 2 */
+.elaet-price-table-ribbon-content {
+  z-index: 9;
+  background: #000;
+  color: #ffffff;
+}
+.elementor-widget-elaet-price-table .elementor-widget-container {
+  overflow: visible !important;
+}
+.elaet-price-table-ribbon-2 .elaet-price-table-ribbon-content {
+  color: #fff;
+  text-align: center;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  position: absolute;
+  top: 0;
+}
+.elaet-price-table-ribbon-2.elaet-ribbon-left
+  .elaet-price-table-ribbon-content {
+  left: 0;
+  -webkit-transform: translateX(-40%) translateY(-40%);
+  -ms-transform: translateX(-40%) translateY(-40%);
+  transform: translateX(-40%) translateY(-40%);
+}
+.elaet-price-table-ribbon-2.elaet-ribbon-right
+  .elaet-price-table-ribbon-content {
+  right: 0;
+  -webkit-transform: translateX(40%) translateY(-40%);
+  -ms-transform: translateX(40%) translateY(-40%);
+  transform: translateX(40%) translateY(-40%);
+}
+
+/* CSS for Ribbon Style 3 */
+.elaet-price-table-ribbon-3 .elaet-price-table-ribbon-content:after,
+.elaet-price-table-ribbon-3 .elaet-price-table-ribbon-content:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 100%;
+  right: 0;
+  border-bottom: 8px solid transparent;
+}
+.elaet-price-table-ribbon-3 .elaet-price-table-ribbon-content:after {
+  border-left: 8px solid rgba(0, 0, 0, 0.2);
+}
+.elaet-price-table-ribbon-3 .elaet-price-table-ribbon-content {
+  text-align: center;
+  -webkit-border-radius: 4px;
+  border-radius: 4px 4px 0 4px;
+  padding: 3px 15px;
+  position: absolute;
+  top: 30%;
+  right: -8px;
+}
+
+.elaet-pricing-style-2 .elaet-price-table .elaet-price-table-features-list {
+  padding: 20px 0px;
+}
+
+/* CSS for RTL Layout */
+.rtl .elaet-price-table-ribbon-1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: auto;
+  -webkit-transform: rotate(0);
+  -ms-transform: rotate(0);
+  transform: rotate(0);
+  width: 15em;
+  overflow: hidden;
+  height: 15em;
+}
+.rtl .elaet-price-table-ribbon-1 .elaet-price-table-ribbon-content {
+  text-align: center;
+  left: 0;
+  width: 150%;
+  margin-top: 35px;
+  font-size: 13px;
+  line-height: 2;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.rtl .elaet-price-table-ribbon-1.elaet-ribbon-left {
+  -webkit-transform: rotate(0);
+  -ms-transform: rotate(0);
+  transform: rotate(0);
+  left: 0;
+  right: auto;
+}
+.rtl .elaet-price-table-ribbon-1.elaet-ribbon-right {
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  left: auto;
+  right: 0;
+}
+.rtl .elaet-price-table-price-wrap,
+.rtl .elaet-pricing-value {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+  -webkit-flex-direction: row-reverse;
+  -moz-box-orient: horizontal;
+  -moz-box-direction: reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+}
+
+.elaet-module-content .clearfix {
+  display: flex;
+}
+.elaet-price-table-layout-4-1 {
+  width: 50%;
+}
+.elaet-price-table-layout-4-2 {
+  width: 50%;
+  align-self: center;
+}
+
+/*---------------------------------------*/
+/*-------- 04. Content Switcher------------
+/*---------------------------------------*/
+
+/* Switcher CSS starts here. */
+.elaet-th-switch-label {
+  position: relative;
+  display: inline-block;
+  width: 4.5em;
+  height: 2.3em;
+  vertical-align: middle;
+}
+.elaet-th-switch-label .elaet-th-switch {
+  display: none;
+}
+.elaet-main-btn {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.elaet-th-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.elaet-th-slider:before {
+  position: absolute;
+  content: "";
+  height: 1.8em;
+  width: 1.8em;
+  left: 0.25em;
+  bottom: 0.25em;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+.elaet-th-switch:checked + .elaet-th-slider:before {
+  -webkit-transform: translateX(2.1em);
+  -ms-transform: translateX(2.1em);
+  transform: translateX(2.1em);
+}
+
+/* Round - 1 switch css */
+.elaet-th-slider.elaet-th-round {
+  -webkit-border-radius: 1.5em;
+  border-radius: 1.5em;
+}
+
+.elaet-th-slider.elaet-th-round:before {
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+.elementor-widget-elaet-content-toggle .elaet-th-head-1 {
+  margin: 0px;
+  padding: 0px;
+}
+.elementor-widget-elaet-content-toggle .elaet-th-head-2 {
+  margin: 0px;
+  padding: 0px;
+}
+.elaet-ct-desktop-stack--yes .elaet-th-toggle {
+  -js-display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 25px;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -moz-box-orient: vertical;
+  -moz-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+.elaet-th-toggle {
+  -js-display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 25px;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -moz-box-orient: horizontal;
+  -moz-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+/*.elaet-th-toggle-sections {
+  padding: 25px;
+}*/
+
+/* Label box - switch */
+.elaet-label-box {
+  position: relative;
+  width: 7em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  vertical-align: middle;
+}
+
+.elaet-label-box-checkbox {
+  display: none;
+}
+
+.elaet-label-box-label {
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  border: 0em solid #999999;
+  -webkit-border-radius: 0em;
+  border-radius: 10em;
+}
+
+.elaet-label-box-inner {
+  display: block;
+  width: 200%;
+  margin-left: -100%;
+  -webkit-transition: margin 0.3s ease-in 0s;
+  transition: margin 0.3s ease-in 0s;
+}
+
+.elaet-label-box-inner > span {
+  display: block;
+  float: left;
+  position: relative;
+  width: 50%;
+  height: 2.1em;
+  padding: 0;
+  line-height: 2.1em;
+  font-size: 1em;
+  color: white;
+  font-family: Trebuchet, Arial, sans-serif;
+  font-weight: bold;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.elaet-label-box-inner .elaet-label-box-active {
+  padding-left: 2em;
+  color: #ffffff;
+  border-radius: 5em;
+}
+
+.elaet-label-box-inner .elaet-label-box-inactive {
+  padding-right: 2em;
+  color: #ffffff;
+  text-align: right;
+  border-radius: 5em;
+}
+
+.elaet-label-box-switch {
+  isplay: block;
+  width: 50%;
+  margin: 0em;
+  text-align: center;
+  border: 0em solid #999999;
+  -webkit-border-radius: 0em;
+  border-radius: 0em;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+.elaet-label-box-active .elaet-label-box-switch {
+  background: #a1a1a1;
+  left: 0;
+  border-radius: 10em 0 0 10em;
+}
+.elaet-label-box-inactive .elaet-label-box-switch {
+  right: 0;
+  border-radius: 0 10em 10em 0;
+}
+.elaet-label-box-checkbox:checked
+  + .elaet-label-box-label
+  .elaet-label-box-inner {
+  margin-left: 0;
+}
+
+/*Oval Tick Box*/
+
+/* Round - 2 switch css */
+
+.elaet-toggle {
+  display: block;
+  position: relative;
+  background: 0 0;
+  width: 3.8em;
+}
+
+.elaet-toggle input[type="checkbox"] + label {
+  position: relative;
+  display: inline-block;
+  top: 0;
+  left: 0.2em;
+  padding-left: 0;
+  color: #000;
+  cursor: pointer;
+  width: 2.28em;
+  height: 1.3em;
+}
+
+.elaet-toggle input[type="checkbox"] + label:before {
+  -webkit-transition: background-color 0.4s ease;
+  transition: background-color 0.4s ease;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  position: absolute;
+  top: 0.4em;
+  left: 0;
+  content: "";
+  width: 3.5em;
+  height: 1em;
+  background-color: #767676;
+  -webkit-border-radius: 0.5em;
+  border-radius: 0.5em;
+}
+.elaet-toggle input[type="checkbox"] + label:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: -webkit-transform 0.2s linear;
+  -webkit-transition: -webkit-transform 0.2s linear;
+  transition: -webkit-transform 0.2s linear;
+  transition: transform 0.2s linear;
+  transition: transform 0.2s linear, -webkit-transform 0.2s linear;
+  position: absolute;
+  top: 0;
+  left: -0.8em;
+  width: 2.4em;
+  height: 2.4em;
+  content: "";
+  font-size: 0.75em;
+  -webkit-border-radius: 500em;
+  border-radius: 500em;
+  border: 0.3em solid #767676;
+}
+
+.elaet-switch-round-2 {
+  visibility: hidden;
+  margin: 0 !important;
+  padding: 0 !important;
+  opacity: 0;
+  display: none;
+}
+
+/*Capsule Switch Styling*/
+.elaet-toggle.elaet-capsule-div input[type="checkbox"] + label:before {
+  -webkit-transition: background-color 0.4s ease;
+  transition: background-color 0.4s ease;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  position: absolute;
+  top: 0.4em;
+  left: 0;
+  content: "";
+  width: 3em;
+  height: 1em;
+  background-color: #767676;
+  border-radius: 0px;
+}
+.elaet-toggle.elaet-capsule-div input[type="checkbox"] + label:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: -webkit-transform 0.2s linear;
+  -webkit-transition: -webkit-transform 0.2s linear;
+  transition: -webkit-transform 0.2s linear;
+  transition: transform 0.2s linear;
+  transition: transform 0.2s linear, -webkit-transform 0.2s linear;
+  position: absolute;
+  top: -0.1em;
+  left: -0.4em;
+  width: 1.3em;
+  height: 2.5em;
+  content: "";
+  font-size: 0.75em;
+  -webkit-border-radius: 500em;
+  border-radius: 500em;
+  border: 0.3em solid #767676;
+}
+
+/*---------------------------------------*/
+/*-------- 05. Post & Page Pro------------
+/*---------------------------------------*/
+
+/* Post Type Grid Base CSS */
+
+.elaet-grid:after {
+  display: block;
+  visibility: hidden;
+  clear: both;
+  height: 0;
+  font-size: 0;
+  content: " ";
+}
+
+.elaet-grid-container {
+  display: -webkit-flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.elaet-grid-wrapper {
+  display: -webkit-flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+.elaet-grid-col {
+  width: 100%;
+}
+.elaet-grid .elaet-grid-col-image img {
+  margin-bottom: 10px;
+  display: block;
+  overflow: hidden;
+  /*box-shadow: 0 3px 10px 0 rgba(181,181,181,1);*/
+}
+
+.elaet-grid .elaet-grid-wrapper .elaet-grid-col .elaet-grid-col-image {
+  position: relative;
+  display: flex;
+}
+.elaet-grid
+  .elaet-grid-wrapper
+  .elaet-grid-col
+  .elaet-grid-col-image
+  .elaet-date-meta {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 85px;
+  height: 85px;
+  padding: 11px;
+  margin: 15px;
+  background: #006799;
+  color: #ffffff;
+  text-align: center;
+}
+.elaet-date-meta span {
+  width: 100%;
+  line-height: 1;
+  text-align: center;
+  display: block;
+}
+.elaet-date-meta span:nth-child(2) {
+  font-size: 28px;
+}
+
+.elaet-grid .elaet-grid-title,
+.elaet-grid .elaet-grid-title a {
+  margin: 0;
+  color: #333;
+  font-size: 24px;
+  line-height: 1.5;
+}
+
+.elaet-grid-meta {
+  margin: 0 0 10px 0;
+}
+
+.elaet-grid-meta > span {
+  margin-right: 10px;
+  color: #999;
+  font-size: 14px;
+}
+
+.elaet-grid-meta > span:last-of-type {
+  margin-right: 0;
+}
+
+.elaet-grid-meta .fa {
+  margin-right: 7px;
+}
+
+.elaet-grid-meta a {
+  color: #999;
+  text-decoration: none;
+}
+
+.elaet-grid-meta a:hover,
+.elaet-grid-meta a:focus {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.elaet-grid-categories-item:after,
+.elaet-grid-tags-item:after {
+  content: ", ";
+}
+
+.elaet-grid-categories-item:last-of-type:after,
+.elaet-grid-tags-item:last-of-type:after {
+  display: none;
+  content: "";
+}
+
+.elaet-grid-content {
+  margin: 0 0 10px 0;
+  color: #555;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.elaet-grid-footer a {
+  display: inline-block;
+  color: #333;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 5px;
+}
+
+/**********Drop Cap Effect*******
+********************************/
+div.elaet-grid-content.drop-cap-class:first-letter {
+  padding: 0 10px;
+  font-size: 4em;
+  float: left;
+  line-height: 0.9em;
+}
+/********* List Layout *********
+********************************/
+.elaet-grid-container.elaet-grid-style-list .elaet-grid-col {
+  display: -webkit-flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.elaet-grid-container.elaet-grid-style-list
+  .elaet-grid-col
+  .elaet-grid-col-image {
+  order: 1;
+}
+.elaet-grid-container.elaet-grid-style-list
+  .elaet-grid-col
+  .elaet-grid-col-content {
+  order: 2;
+}
+.elaet-grid-container.elaet-grid-style-list .elaet-grid-col-image {
+  width: 40%;
+}
+.elaet-grid-container.elaet-grid-style-list .elaet-grid-col-content {
+  width: 60%;
+  padding: 0 10px 0 10px;
+}
+.elaet-grid-container.elaet-grid-style-list
+  .elaet-grid-col.elaet-no-image
+  .elaet-grid-col-content {
+  width: 100%;
+  padding-left: 0;
+}
+
+/********* Zigzag Layout *********
+**********************************/
+.elaet-grid-container.elaet-grid-style-zigzag
+  .elaet-grid-wrapper
+  .elaet-grid-col {
+  display: -webkit-flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+.elaet-grid-container.elaet-grid-style-zigzag
+  div.elaet-grid-wrapper:nth-child(odd)
+  .elaet-grid-col
+  .elaet-grid-col-image {
+  order: 4;
+}
+.elaet-grid-container.elaet-grid-style-zigzag .elaet-grid-col-image {
+  width: 40%;
+}
+
+.elaet-grid-container.elaet-grid-style-zigzag .elaet-grid-col-content {
+  width: 60%;
+  padding: 0 10px 0 10px;
+}
+.elaet-grid-container.elaet-grid-style-zigzag
+  .elaet-grid-col.elaet-no-image
+  .elaet-grid-col-content {
+  width: 100%;
+  padding-left: 0;
+}
+.elaet-grid {
+  position: relative;
+}
+.elaet-grid-pagination {
+  width: 100%;
+  height: 100px;
+  display: flex;
+}
+
+/*************Desktop Layout ***************
+********************************************/
+
+.elaet-grid-desktop-1 .elaet-grid-wrapper {
+  width: 100%;
+}
+
+.elaet-grid-desktop-2 .elaet-grid-wrapper {
+  width: 50%;
+}
+.elaet-grid-desktop-2.elaet-grid-parent div.elaet-grid-wrapper:first-child {
+  width: 100%;
+}
+.elaet-grid-desktop-2.elaet-grid-sixth-post-parent
+  div.elaet-grid-wrapper:nth-child(5n + 6) {
+  width: 100%;
+}
+
+.elaet-grid-desktop-3 .elaet-grid-wrapper {
+  width: 33.333%;
+}
+.elaet-grid-desktop-3.elaet-grid-parent div.elaet-grid-wrapper:first-child {
+  width: 66.666%;
+}
+.elaet-grid-desktop-3.elaet-grid-sixth-post-parent
+  div.elaet-grid-wrapper:nth-child(5n + 6) {
+  width: 66.666%;
+}
+
+.elaet-grid-desktop-4 .elaet-grid-wrapper {
+  width: 25%;
+}
+.elaet-grid-desktop-4.elaet-grid-parent div.elaet-grid-wrapper:first-child {
+  width: 50%;
+}
+.elaet-grid-desktop-4.elaet-grid-sixth-post-parent
+  div.elaet-grid-wrapper:nth-child(5n + 6) {
+  width: 50%;
+}
+
+/*************Tablet Layout ***************
+******************************************/
+
+@media (max-width: 992px) {
+  .elaet-grid-tablet-1 .elaet-grid-wrapper {
+    width: 100%;
+  }
+  .elaet-grid-tablet-1.elaet-grid-parent div.elaet-grid-wrapper:first-child {
+    width: 100%;
+  }
+  .elaet-grid-tablet-1.elaet-grid-sixth-post-parent
+    div.elaet-grid-wrapper:nth-child(5n + 6) {
+    width: 100%;
+  }
+
+  .elaet-grid-tablet-2 .elaet-grid-wrapper {
+    width: 50%;
+  }
+  .elaet-grid-tablet-2.elaet-grid-parent div.elaet-grid-wrapper:first-child {
+    width: 100%;
+  }
+  .elaet-grid-tablet-2.elaet-grid-sixth-post-parent
+    div.elaet-grid-wrapper:nth-child(5n + 6) {
+    width: 100%;
+  }
+
+  .elaet-grid-tablet-3 .elaet-grid-wrapper {
+    width: 33.333%;
+  }
+  .elaet-grid-tablet-3.elaet-grid-parent div.elaet-grid-wrapper:first-child {
+    width: 66.666%;
+  }
+  .elaet-grid-tablet-3.elaet-grid-sixth-post-parent
+    div.elaet-grid-wrapper:nth-child(5n + 6) {
+    width: 66.666%;
+  }
+
+  .elaet-grid-tablet-4 .elaet-grid-wrapper {
+    width: 25%;
+  }
+  .elaet-grid-tablet-4.elaet-grid-parent div.elaet-grid-wrapper:first-child {
+    width: 50%;
+  }
+  .elaet-grid-tablet-4.elaet-grid-sixth-post-parent
+    div.elaet-grid-wrapper:nth-child(5n + 6) {
+    width: 50%;
+  }
+}
+/*************Mobile Layout ***************
+******************************************/
+
+@media (max-width: 767px) {
+  .elaet-grid-mobile-1 .elaet-grid-wrapper {
+    width: 100%;
+  }
+  .elaet-grid-mobile-1.elaet-grid-parent div.elaet-grid-wrapper:first-child {
+    width: 100%;
+  }
+  .elaet-grid-mobile-1.elaet-grid-sixth-post-parent
+    div.elaet-grid-wrapper:nth-child(5n + 6) {
+    width: 100%;
+  }
+
+  .elaet-grid-mobile-2 .elaet-grid-wrapper {
+    width: 50%;
+  }
+  .elaet-grid-mobile-2.elaet-grid-parent div.elaet-grid-wrapper:first-child {
+    width: 100%;
+  }
+  .elaet-grid-mobile-2.elaet-grid-sixth-post-parent
+    div.elaet-grid-wrapper:nth-child(5n + 6) {
+    width: 100%;
+  }
+
+  .elaet-grid-mobile-3 .elaet-grid-wrapper {
+    width: 33.333%;
+  }
+  .elaet-grid-mobile-3.elaet-grid-parent div.elaet-grid-wrapper:first-child {
+    width: 66.666%;
+  }
+  .elaet-grid-mobile-3.elaet-grid-sixth-post-parent
+    div.elaet-grid-wrapper:nth-child(5n + 6) {
+    width: 66.666%;
+  }
+  .elaet-grid-mobile-4 .elaet-grid-wrapper {
+    width: 25%;
+  }
+  .elaet-grid-mobile-4.elaet-grid-parent div.elaet-grid-wrapper:first-child {
+    width: 50%;
+  }
+  .elaet-grid-mobile-4.elaet-grid-sixth-post-parent
+    div.elaet-grid-wrapper:nth-child(5n + 6) {
+    width: 50%;
+  }
+}
+
+/* End Of Post Type Grid Base CSS */
+
+.elaet-service-box {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.elaet-position-left .elaet-service-box {
+  flex-direction: row;
+
+  -webkit-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+}
+
+.elaet-position-right .elaet-service-box {
+  flex-direction: row-reverse;
+
+  -webkit-box-direction: reverse;
+  -webkit-box-orient: horizontal;
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+}
+
+.elaet-position-top .elaet-service-box {
+  flex-direction: column;
+
+  -webkit-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+}
+
+.elaet-service-box .elaet-service-box-content .elaet-service-title,
+.elaet-service-box .elaet-service-box-content .elaet-service-text {
+  margin: 0;
+}
+
+/** passed from th.css **/
+
+/*
+ * Elementor CSS support
+ */
+
+.th-product-section .section-title {
+  margin-bottom: 20px;
+}
+
+.elementor-widget-wp-widget-th-recent-posts h5,
+.elementor-widget-wp-widget-th-recent-posts-plus h5 {
+  font-size: 1.75rem;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.th-recent-posts,
+.th-recent-posts-plus {
+  width: 32.3333%;
+  padding: 0;
+  margin: 0;
+  margin-right: 1.3333%;
+  float: left;
+}
+
+.th-recent-posts:last-child,
+.th-recent-posts-plus:last-child {
+  margin-right: 0;
+}
+
+.th-recent-posts img {
+  width: 100%;
+  height: 250px;
+  margin: 10px 0;
+  border-radius: 6px;
+}
+
+.th-recent-posts .th-content {
+  padding: 1% 2%;
+}
+
+@media screen and (max-width: 768px) {
+  .th-recent-posts {
+    width: 48%;
+    padding: 0;
+    margin: 0 1%;
+  }
+
+  .th-recent-posts img {
+    height: 300px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 667px) {
+  .th-recent-posts {
+    width: 100%;
+    margin: 0;
+  }
+
+  .th-recent-posts img {
+    height: 300px;
+    margin: 0 auto;
+  }
+}
+
+/*---------------------------------------*/
+/*-------- 06. Contact Form 7------------
+/*---------------------------------------*/
+.cf-seven-install {
+  color: red;
+  font-weight: bold;
+  font-size: 26px;
+  text-align: center;
+}
+
+.cf-seven-choose {
+  color: red;
+  font-weight: bold;
+  font-size: 26px;
+  text-align: center;
+}
+
+.elaet-custom-radio-checkbox input[type="checkbox"],
+.elaet-custom-radio-checkbox input[type="radio"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border-style: solid;
+  border-width: 0;
+  outline: none;
+  min-width: 1px;
+  width: 15px;
+  height: 15px;
+  background: #ddd;
+  padding: 3px;
+}
+
+.elaet-custom-radio-checkbox input[type="checkbox"]:before,
+.elaet-custom-radio-checkbox input[type="radio"]:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: block;
+}
+
+.elaet-custom-radio-checkbox input[type="checkbox"]:checked:before,
+.elaet-custom-radio-checkbox input[type="radio"]:checked:before {
+  background: #8c8c8c;
+  -webkit-transition: all 0.25s ease-out 0s;
+  transition: all 0.25s ease-out 0s;
+}
+.elaet-custom-radio-checkbox input[type="radio"] {
+  border-radius: 50%;
+}
+
+.elaet-custom-radio-checkbox input[type="radio"]:before {
+  border-radius: 50%;
+}
+.elaet-cf7-container .wpcf7-form-control.wpcf7-submit {
+  padding: 12px 0;
+  border: none;
+  font-size: 21px;
+}
+/*---------------------------------------*/
+/*-------- 07. Image Pointer ------------
+/*---------------------------------------*/
+
+.pointer-image-container {
+  position: relative;
+}
+
+.elaet-pointer-div {
+  position: absolute;
+  text-align: center;
+}
+.pointer-div:hover {
+  cursor: pointer;
+}
+.pointer-div-flex {
+  display: flex;
+}
+
+/************************************
+********Pointer Styling***********/
+@keyframes shadow-pulse {
+  0% {
+    box-shadow: 0px 0px 0 0px rgba(0, 0, 0, 0.2);
+  }
+  100% {
+    box-shadow: 0px 0px 0 20px rgba(255, 255, 255, 0);
+  }
+}
+.pointer-icon-div {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 25px;
+  font-size: 12px;
+  cursor: pointer;
+  animation: shadow-pulse 0.9s infinite;
+}
+
+/******************************
+********Tooltip Text ***********/
+
+.tooltip-text-div {
+  position: relative;
+  padding: 2px 6px;
+  text-align: center;
+  font-size: 15px;
+  margin: 15px 0 0 0;
+  max-width: 200px;
+  border-radius: 5px;
+}
+.tooltip-text-div:after {
+  content: "";
+  position: absolute;
+  display: block;
+
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+
+  top: -13px;
+  left: 6px;
+}
+.tooltip-text-hover-hide-class {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+
+.pointer-icon-div:hover + div.tooltip-text-hover-hide-class {
+  visibility: visible;
+  opacity: 1;
+  border-radius: 5px;
+}
+
+/*---------------------------------------*/
+/*-------- 08. Icon List------------
+/*---------------------------------------*/
+
+/*List Styling*/
+ul.elaet-icon-list-items,
+ul.elaet-inline-items {
+  list-style-type: none;
+  padding: 0;
+  line-height: 1;
+}
+ul.elaet-inline-items {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/*List item inline*/
+/* ul.elaet-inline-items li.elaet-inline-item {
+  display: inline-block;
+} */
+
+.elaet-icon-list-items:not(.elaet-inline-items)
+  .elaet-icon-list-item:not(:last-child):after {
+  display: block;
+}
+span.elaet-icon-list-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.elaet-list-item-wrapper
+  .elaet-list-icon-wrapper
+  span.elaet-icon-list-icon
+  > i {
+  color: inherit;
+}
+.elaet-icon-list-item span.elaet-list-item-wrapper {
+  display: flex;
+  cursor: pointer;
+  transition: 0.2s all linear;
+  align-items: center;
+}
+.elaet-icon-list-item span.elaet-list-item-wrapper span.elaet-icon-list-text {
+  align-self: center;
+}
+
+/*---------------------------------------*/
+/*-------- 09. Instagram Feed------------
+/*---------------------------------------*/
+
+.elaet-feed-main .elaet-feed-item {
+  position: relative;
+  line-height: 0;
+}
+
+.elaet-feed-main .elaet-feed-item a {
+  display: inline-block;
+  width: 100%;
+  line-height: 0;
+  position: relative;
+}
+
+.elaet-feed-main .elaet-feed-item a:before {
+  content: "";
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.elaet-feed-main .elaet-feed-item .elaet-feed-likes-comments {
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+}
+
+.elaet-feed-main .elaet-feed-item .elaet-feed-likes-comments span {
+  display: inline-block;
+  position: relative;
+  z-index: 5;
+  color: #fff;
+}
+
+.elaet-feed-main .elaet-feed-item:hover a:before,
+.elaet-feed-main .elaet-feed-item:hover .elaet-feed-likes-comments {
+  opacity: 1;
+}
+
+.elaet-feed-main .elaet-feed-item a:before,
+.elaet-feed-main .elaet-feed-item:hover a:before,
+.elaet-feed-main .elaet-feed-item:hover .elaet-feed-likes-comments,
+.elaet-feed-main .elaet-feed-item .elaet-feed-likes-comments {
+  -webkit-transition: 0.1s linear;
+  -moz-transition: 0.1s linear;
+  -o-transition: 0.1s linear;
+  transition: 0.1s linear;
+}
+
+/*Bio Hide class*/
+.hide-bio-class {
+  display: none;
+}
+
+/*****Access Token Div**********/
+.access-token-div {
+  text-align: center;
+  border: 2px solid #5d3b3b;
+  color: #504848;
+  padding: 20px;
+}
+
+.access-token-div a {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 23px;
+  color: #e91e63;
+  margin-top: 12px;
+}
+.access-token-activated a {
+  display: inline-block;
+  background-color: #e91e63;
+  color: #ffffff;
+  padding: 7px 14px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 23px;
+  opacity: 0.9;
+  border-radius: 3px;
+  margin-top: 12px;
+}
+
+/*---------------------------------------*/
+/*-------- 10. Countdown Clock------------
+/*---------------------------------------*/
+
+.elaet-countdown-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.elaet-countdown-items > li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: table-cell;
+  position: relative;
+}
+
+.elaet-countdown-item > div {
+  text-align: center;
+  padding: 20px 18px;
+}
+
+.elaet-countdown-label-block .elaet-countdown-digits,
+.elaet-countdown-label-block .elaet-countdown-label {
+  display: block;
+  text-align: center;
+}
+
+.elaet-countdown-digits {
+  font-size: 54px;
+  line-height: 1;
+}
+
+.elaet-countdown-label {
+  font-size: 18px;
+  line-height: 1;
+  color: #ffffff;
+}
+
+.elaet-countdown-show-separator .elaet-countdown-digits::after {
+  position: absolute;
+  left: 98%;
+  z-index: 9999;
+}
+
+.elaet-countdown-item:last-child .elaet-countdown-digits::after {
+  display: none;
+}
+
+/*--- Style 1 ---*/
+.elaet-countdown-items.style-1 .elaet-countdown-item > div {
+  background: #3f51b5;
+}
+/*--- Style 2 ---*/
+.elaet-countdown-items.style-2 .elaet-countdown-item > div {
+  background: #3f51b5;
+}
+
+/* Css to show image as background for clock text and set text-color to white (digits/label)*/
+.elaet-countdown-digits.countdown-text-color,
+.elaet-countdown-label.countdown-text-color {
+  color: #ffffff;
+}
+
+.elaet-countdown-digits.countdown-text-background,
+.elaet-countdown-label.countdown-text-background {
+  color: #ffffff;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+}
+
+/*Display labels inline*/
+.elaet-countdown-days.elaet-countdown-label-inline,
+.elaet-countdown-hours.elaet-countdown-label-inline,
+.elaet-countdown-minutes.elaet-countdown-label-inline,
+.elaet-countdown-seconds.elaet-countdown-label-inline {
+  display: flex;
+}
+
+.elaet-countdown-days.elaet-countdown-label-inline .elaet-countdown-label,
+.elaet-countdown-hours.elaet-countdown-label-inline .elaet-countdown-label,
+.elaet-countdown-minutes.elaet-countdown-label-inline .elaet-countdown-label,
+.elaet-countdown-seconds.elaet-countdown-label-inline .elaet-countdown-label {
+  align-self: flex-end;
+}
+
+/*---------------------------------------*/
+/*-------- 11. Compare Images ------------
+/*---------------------------------------*/
+.elaet-ic-label-horizontal-top
+  .twentytwenty-horizontal
+  .twentytwenty-before-label:before,
+.elaet-ic-label-horizontal-top
+  .twentytwenty-horizontal
+  .twentytwenty-after-label:before {
+  transform: translateY(0);
+  top: 10px;
+}
+
+.elaet-ic-label-horizontal-bottom
+  .twentytwenty-horizontal
+  .twentytwenty-before-label:before,
+.elaet-ic-label-horizontal-bottom
+  .twentytwenty-horizontal
+  .twentytwenty-after-label:before {
+  bottom: 10px;
+  transform: translateY(0);
+  top: auto;
+}
+
+.twentytwenty-vertical .twentytwenty-before-label:before,
+.twentytwenty-vertical .twentytwenty-after-label:before {
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+.elaet-ic-label-vertical-left
+  .twentytwenty-vertical
+  .twentytwenty-before-label:before,
+.elaet-ic-label-vertical-left
+  .twentytwenty-vertical
+  .twentytwenty-after-label:before {
+  left: 10px;
+  transform: translateX(0);
+}
+
+.elaet-ic-label-vertical-right
+  .twentytwenty-vertical
+  .twentytwenty-before-label:before,
+.elaet-ic-label-vertical-right
+  .twentytwenty-vertical
+  .twentytwenty-after-label:before {
+  left: auto;
+  right: 10px;
+  transform: translateX(0);
+}
+.twentytwenty-container.elaet-compare-images img {
+  width: 100%;
+  height: auto;
+}
+.twentytwenty-container.elaet-compare-images img.image-three-compare {
+  position: relative;
+  opacity: 0;
+  visibility: hidden;
+}
+.twentytwenty-container.elaet-compare-images img.image-two-compare {
+  height: 100%;
+  object-fit: cover;
+}
+/* Before and After Label Alignment Styles*/
+
+.elaet-ic-label-horizontal-top
+  .twentytwenty-horizontal
+  .twentytwenty-before-label:before,
+.elaet-ic-label-horizontal-top
+  .twentytwenty-horizontal
+  .twentytwenty-after-label:before {
+  top: 30px;
+}
+.twentytwenty-horizontal .twentytwenty-before-label:before {
+  left: 15px;
+}
+.twentytwenty-horizontal .twentytwenty-after-label:before {
+  right: 15px;
+}
+.elaet-ic-label-horizontal-bottom
+  .twentytwenty-horizontal
+  .twentytwenty-before-label:before,
+.elaet-ic-label-horizontal-bottom
+  .twentytwenty-horizontal
+  .twentytwenty-after-label:before {
+  bottom: 15px;
+}
+.twentytwenty-vertical .twentytwenty-before-label:before {
+  top: 15px;
+}
+.twentytwenty-vertical .twentytwenty-after-label:before {
+  bottom: 15px;
+}
+.elaet-ic-label-vertical-left
+  .twentytwenty-vertical
+  .twentytwenty-before-label:before,
+.elaet-ic-label-vertical-left
+  .twentytwenty-vertical
+  .twentytwenty-after-label:before {
+  left: 55px;
+}
+
+.elaet-ic-label-vertical-right
+  .twentytwenty-vertical
+  .twentytwenty-before-label:before,
+.elaet-ic-label-vertical-right
+  .twentytwenty-vertical
+  .twentytwenty-after-label:before {
+  right: 15px;
+}
+
+/*Compare Images module alignment styling */
+.twentytwenty-wrapper {
+  display: flex;
+}
+
+/*---------------------------------------*/
+/*-------- 12. Advanced Tab ------------
+/*---------------------------------------*/
+
+.elaet-advanced-tabs .tab-links {
+  list-style-type: none;
+  margin: 0;
+}
+
+.tab-links .tab-link {
+  padding: 10px 15px;
+  /*background: orange;*/
+  display: flex;
+  color: #fff;
+}
+.tab-link span {
+  display: flex;
+  align-self: center;
+  margin-right: 5px;
+}
+.tab-links .active .tab-link {
+  /*background: red;*/
+  border-right: none;
+}
+.tab {
+  display: none;
+}
+
+.tab.active {
+  display: block;
+}
+
+.elaet-tab-image-icon img {
+  width: 16px;
+  height: 16px;
+}
+
+.elaet-advanced-tabs.vertical {
+  display: flex;
+  flex-direction: row;
+}
+.elaet-advanced-tabs.vertical .tab-links li {
+  display: block;
+}
+.elaet-advanced-tabs.vertical .tab-links.triangle + .tabs-content {
+  margin-left: 15px;
+}
+.elaet-advanced-tabs.vertical .tab-links li.active {
+  position: relative;
+}
+.elaet-advanced-tabs.vertical .tab-links.triangle li.active:after {
+  content: "";
+  -webkit-clip-path: polygon(50% 50%, 0 0, 0 100%);
+  clip-path: polygon(50% 50%, 0 0, 0 100%);
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 22%;
+  left: 100%;
+  background: red;
+}
+.elaet-advanced-tabs.vertical .tab-links {
+  min-width: 150px;
+}
+
+.elaet-advanced-tabs.horizontal .tab-links.triangle + .tabs-content {
+  margin-top: 15px;
+}
+.elaet-advanced-tabs.horizontal {
+  display: flex;
+  flex-direction: column;
+}
+
+.elaet-advanced-tabs.horizontal .tab-links {
+  display: flex;
+}
+.elaet-advanced-tabs.horizontal .tab-links li.active {
+  position: relative;
+}
+.elaet-advanced-tabs.horizontal .tab-links.triangle li.active:after {
+  content: "";
+  -webkit-clip-path: polygon(100% 0, 0 0, 50% 50%);
+  clip-path: polygon(100% 0, 0 0, 50% 50%);
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 100%;
+  left: 33%;
+}
+
+@media only screen and (max-width: 360px) {
+  /* For mobile phones: */
+  .elaet-advanced-tabs.horizontal .tab-links,
+  .elaet-advanced-tabs.vertical {
+    display: block;
+  }
+
+  .elaet-advanced-tabs.vertical .tab-links.triangle li.active:after,
+  .elaet-advanced-tabs.horizontal .tab-links.triangle li.active:after {
+    content: "";
+    -webkit-clip-path: polygon(0 0, 0 0, 0 0);
+    clip-path: polygon(0 0, 0 0, 0 0);
+    width: 0;
+    height: 0;
+  }
+}
+
+/*---------------------------------------*/
+/*-------- 13. Counter ------------
+/*---------------------------------------*/
+
+.counter-container {
+  text-align: center;
+}
+.counter-wrapper {
+  justify-content: center;
+}
+
+.elaet-counter-number {
+  display: inline-block;
+}
+.elaet-counter-number,
+.elaet-counter-title,
+.counter-icon-container .fa,
+.counter-prefix-number,
+.counter-suffix-number,
+.elementor-widget-elemento-advance-heading .elemento-heading-text.gradient-active {
+  font-weight: bold;
+  background-size: cover;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.counter-icon-container i {
+  display: block;
+}
+
+.elemento-addons-pagination {
+  margin-top: 59px;
+}
+.elemento-addons-pagination .elemento-post-link {
+  text-decoration: none!important;
+}
