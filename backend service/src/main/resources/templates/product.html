@@ -1,131 +1,358 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{base::layout(~{::section})}">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Products - PTN Store</title>
 </head>
 <body>
-       <section>
-         <div  class="container-fluid bg-dark p-5 mt-5">
-           <div class="row">
-             <div class="col-md-8  offset-md-2">
-               <form action="/products" method="get">
-                 <div class="input-group">
-                   <input type="text" class="form-control" name="ch">
-                   <button class="btn btn-light text-dark ms-3 col-md-2"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
-
-                 </div>
-               </form>
-
-             </div>
-
-           </div>
-
-         </div>
-
-         <div class="container-fluid mt-1">
-           <div class="row">
-
-             <div class="col-md-2 p-0">
-
-                 <div class="card shadow-sm p-0 mb-5 bg-body-tertiary rounded">
-                   <div class="card-body">
-                     <div class="list-group">
-                       <p class="fs-5">Category</p>
-                       <a href="/products" th:classappend="${paramValue==''}?'active':''"
-                          class="list-group-item list-group-item-action" aria-current="true">
-                         All
-                       </a>
-
-                       <a th:each="c:${categories}" th:href="@{'/products?category='+${c.name}}"
-                          th:classappend="${paramValue == c.name} ? 'active':''"
-                          class="list-group-item list-group-item-action">[[${c.name}]]</a>
-
-
-                     </div>
-
-                 </div>
-               </div>
-
-             </div>
-
-             <div class="col-md-10">
-               <div class="card shadow-sm p-3 mb-5 bg-body-tertiary rounded">
-                 <div class="card-body">
-                   <p class="fs-3 text-center">Product</p>
-                       <div class="row">
-
-                         <th:block th:if="${productsSize> 0}">
-                         <div class="col-md-3 mt-3" th:each="p:${products}">
-                           <div class="card">
-                             <div class="card-body">
-                               <img alt="" th:src="@{'/img/product_img/'+${p.image}}" width="100%"
-                               height="150px">
-                               <p class="fs-5 text-center">[[${p.title}]]</p>
-                               <div class="row text-center">
-                                 <p class="fs-6 fw-bold">
-                                   <span>[[${p.discountPrice}]]&#8363;</span> <br/>
-                                   <span class="text-decoration-line-through text-secondary">[[${p.price}]]&#8363;</span> <span class="fs-6 text-success">[[${p.discount}]]% off</span>
-                                 </p>
-
-                                 <a th:href="@{'/product/'+${p.id}}" class="btn btn-primary col-md-6 offset-md-3">View Detail</a>
-                               </div>
-                             </div>
-                           </div>
-                         </div>
-                     </th:block>
-
-                     <th:block th:unless="${productsSize>0}">
-                       <p class="fs-3 text-center text-danger">Product Not Available</p>
-
-                     </th:block>
-
-                         <!--End -->
-
-                       </div>
-
-                 </div>
-
-               </div>
-               <div class="row">
-                 <div class="col-md-4">Total Product  : [[${totalElements}]]</div>
-                 <div class="col-md-6">
-                   <th:block th:if="${productsSize>0}">
-                   <nav aria-label="Page navigation example">
-                     <ul class="pagination">
-                       <li class="page-item">
-                         <a class="page-link" href="#" aria-label="Previous"
-
-                            th:classappend="${isFirst}?'disabled':''"
-                            th:href="@{'/products?pageNo='+${pageNo - 1}}" >
-                           <span aria-hidden="true">&laquo;</span>
-                         </a>
-                       </li>
-                       <li th:each="i:${#numbers.sequence(1,totalPages)}"
-
-                               class="page-item" th:classappend="${pageNo+1==i}?'active':''" >
-
-                         <a class="page-link" th:href="@{'/products?pageNo='+${i - 1}}">[[${i}]]</a></li>
-
-                       <li class="page-item">
-                         <a class="page-link"  aria-label="Next" th:href="@{'/products?pageNo='+${pageNo + 1}}"
-                            th:classappend="${isLast}?'disabled':''">
-                           <span aria-hidden="true">&raquo;</span>
-                         </a>
-                       </li>
-                     </ul>
-                   </nav>
-
-                   </th:block>
-                 </div>
-               </div>
-             </div>
-
-           </div>
-
-         </div>
-       </section>
-
+<section>
+    <style>
+        .products-page {
+            background-color: #f2f8fe;
+            padding: 32px 0;
+        }
+        
+        .container-custom {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            overflow: hidden;
+        }
+        
+        .sidebar-header {
+            background-color: #0071dc;
+            color: white;
+            padding: 16px 20px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+        
+        .category-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .category-list .list-group-item {
+            border: none;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 14px 20px;
+            color: #0a0a0a;
+            transition: all 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .category-list .list-group-item:hover {
+            background-color: #f2f8fe;
+            color: #0071dc;
+        }
+        
+        .category-list .list-group-item.active {
+            background-color: #0071dc;
+            color: white;
+            font-weight: 600;
+        }
+        
+        /* Products Grid */
+        .products-container {
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .products-header h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0a0a0a;
+            margin: 0;
+        }
+        
+        .product-count {
+            color: #46474a;
+            font-size: 14px;
+        }
+        
+        .product-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            transform: translateY(-4px);
+            border-color: #0071dc;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            padding: 12px;
+            background-color: #fafafa;
+        }
+        
+        .product-body {
+            padding: 16px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #0a0a0a;
+            margin-bottom: 12px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            min-height: 40px;
+        }
+        
+        .product-price {
+            margin-top: auto;
+        }
+        
+        .current-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0a0a0a;
+        }
+        
+        .original-price {
+            font-size: 14px;
+            text-decoration: line-through;
+            color: #46474a;
+            margin-left: 8px;
+        }
+        
+        .discount-badge {
+            background-color: #16a34a;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 8px;
+        }
+        
+        .btn-view-product {
+            background-color: rgb(255,194,33);
+            color: #0a0a0a;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+            display: block;
+            margin-top: 12px;
+            transition: all 0.3s;
+        }
+        
+        .btn-view-product:hover {
+            background-color: #e6af1f;
+            color: #0a0a0a;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .empty-state i {
+            font-size: 72px;
+            color: #e0e0e0;
+            margin-bottom: 20px;
+        }
+        
+        .empty-state h4 {
+            font-size: 22px;
+            color: #0a0a0a;
+            margin-bottom: 12px;
+        }
+        
+        .empty-state p {
+            color: #46474a;
+        }
+        
+        /* Pagination */
+        .pagination-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .pagination .page-link {
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            color: #0a0a0a;
+            padding: 8px 14px;
+            font-weight: 600;
+            margin: 0 4px;
+        }
+        
+        .pagination .page-link:hover {
+            background-color: #f2f8fe;
+            border-color: #0071dc;
+            color: #0071dc;
+        }
+        
+        .pagination .page-item.active .page-link {
+            background-color: #0071dc;
+            border-color: #0071dc;
+            color: white;
+        }
+    </style>
+    
+    <div class="products-page">
+        <div class="container-custom">
+            <div class="row">
+                <!-- Sidebar -->
+                <div class="col-lg-3">
+                    <div class="sidebar">
+                        <div class="sidebar-header">
+                            <i class="fa-solid fa-list me-2"></i>Categories
+                        </div>
+                        <div class="list-group category-list">
+                            <a href="/products" 
+                               th:classappend="${paramValue==''}?'active':''"
+                               class="list-group-item">
+                                <i class="fa-solid fa-border-all me-2"></i>All Products
+                            </a>
+                            
+                            <a th:each="c:${categories}" 
+                               th:href="@{'/products?category='+${c.name}}"
+                               th:classappend="${paramValue == c.name} ? 'active':''"
+                               class="list-group-item">
+                                [[${c.name}]]
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Products Grid -->
+                <div class="col-lg-9">
+                    <div class="products-container">
+                        <div class="products-header">
+                            <h3>
+                                <th:block th:if="${paramValue != null && !paramValue.isEmpty()}">
+                                    [[${paramValue}]]
+                                </th:block>
+                                <th:block th:unless="${paramValue != null && !paramValue.isEmpty()}">
+                                    All Products
+                                </th:block>
+                            </h3>
+                            <div class="product-count">
+                                <strong>[[${totalElements}]]</strong> products found
+                            </div>
+                        </div>
+                        
+                        <th:block th:if="${productsSize > 0}">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 mb-4" th:each="p:${products}">
+                                    <div class="product-card">
+                                        <img th:src="@{'/img/product_img/'+${p.image}}" th:alt="${p.title}" class="product-image">
+                                        
+                                        <div class="product-body">
+                                            <div class="product-title">
+                                                [[${p.title}]]
+                                            </div>
+                                            
+                                            <div class="product-price">
+                                                <div>
+                                                    <span class="current-price">[[${p.discountPrice}]]₫</span>
+                                                    <span class="original-price">[[${p.price}]]₫</span>
+                                                </div>
+                                                <span class="discount-badge">[[${p.discount}]]% OFF</span>
+                                            </div>
+                                            
+                                            <a th:href="@{'/product/'+${p.id}}" class="btn-view-product">
+                                                View Details
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Pagination -->
+                            <div class="pagination-section">
+                                <div class="product-count">
+                                    Page [[${pageNo + 1}]] of [[${totalPages}]]
+                                </div>
+                                
+                                <nav>
+                                    <ul class="pagination mb-0">
+                                        <li class="page-item" th:classappend="${isFirst}?'disabled':''">
+                                            <a class="page-link" th:href="@{'/products?pageNo='+${pageNo - 1}}">
+                                                <i class="fa-solid fa-chevron-left"></i>
+                                            </a>
+                                        </li>
+                                        
+                                        <li th:each="i:${#numbers.sequence(1, totalPages)}"
+                                            class="page-item" 
+                                            th:classappend="${pageNo+1==i}?'active':''">
+                                            <a class="page-link" th:href="@{'/products?pageNo='+${i - 1}}">
+                                                [[${i}]]
+                                            </a>
+                                        </li>
+                                        
+                                        <li class="page-item" th:classappend="${isLast}?'disabled':''">
+                                            <a class="page-link" th:href="@{'/products?pageNo='+${pageNo + 1}}">
+                                                <i class="fa-solid fa-chevron-right"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </th:block>
+                        
+                        <th:block th:unless="${productsSize > 0}">
+                            <div class="empty-state">
+                                <i class="fa-solid fa-box-open"></i>
+                                <h4>No Products Found</h4>
+                                <p>Try adjusting your search or filter.</p>
+                                <a href="/products" class="btn-walmart-primary mt-3">
+                                    View All Products
+                                </a>
+                            </div>
+                        </th:block>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>

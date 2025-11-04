@@ -1,101 +1,413 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{base::layout(~{::section})}">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="${product.title} + ' - PTN Store'">Product Details</title>
 </head>
 <body>
 <section>
-  <div class="container card-sh" style="margin-top: 70px;margin-bottom: 100px">
-
-    <div class="col-md-12 p-5">
-      <div class="row">
-        <!-- Hien thi thong bao -->
-        <th:block th:if="${session.sucMsg}">
-          <p class="text-success fw-bold alert alert-success text-center" role="alert">[[${session.sucMsg}]]</p>
-          <!-- thuc hien de xoa thong bao -->
-          <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"> </th:block>
-        </th:block>
-
-        <th:block th:if="${session.errorMsg}">
-          <p class="text-danger fw-bold alert alert-danger text-center">[[${session.errorMsg}]]</p>
-          <!-- thuc hien de xoa thong bao -->
-          <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"> </th:block>
-        </th:block>
-
-        <div class="col-md-6 text-end">
-          <img alt="" th:src="@{'/img/product_img/'+${product.image}}" width="330px"
-               height="400px">
+    <style>
+        .product-detail-page {
+            background-color: #f2f8fe;
+            padding: 32px 0;
+        }
+        
+        .container-custom {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .product-detail-container {
+            background: white;
+            border-radius: 8px;
+            padding: 32px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .breadcrumb {
+            background: none;
+            padding: 0;
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+        
+        .breadcrumb-item a {
+            color: #0071dc;
+            text-decoration: none;
+        }
+        
+        .breadcrumb-item a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb-item.active {
+            color: #46474a;
+        }
+        
+        .product-image-section {
+            text-align: center;
+            background-color: #fafafa;
+            padding: 32px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .product-image-section img {
+            max-width: 100%;
+            height: 400px;
+            object-fit: contain;
+        }
+        
+        .product-info-section {
+            padding-left: 32px;
+        }
+        
+        .product-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #0a0a0a;
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+        
+        .product-price-section {
+            background: #f2f8fe;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .current-price {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0a0a0a;
+        }
+        
+        .original-price {
+            font-size: 20px;
+            text-decoration: line-through;
+            color: #46474a;
+            margin-left: 12px;
+        }
+        
+        .discount-badge {
+            background-color: #16a34a;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-block;
+            margin-left: 12px;
+        }
+        
+        .stock-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 12px;
+        }
+        
+        .stock-available {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+        
+        .stock-out {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+        
+        .product-description {
+            margin: 20px 0;
+        }
+        
+        .product-description h5 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0a0a0a;
+            margin-bottom: 12px;
+        }
+        
+        .product-description p {
+            color: #46474a;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+        
+        .product-details-box {
+            background-color: #fafafa;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .product-details-box h5 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0a0a0a;
+            margin-bottom: 12px;
+        }
+        
+        .detail-item {
+            display: flex;
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: #0a0a0a;
+            min-width: 100px;
+        }
+        
+        .detail-value {
+            color: #46474a;
+        }
+        
+        .product-features {
+            display: flex;
+            gap: 16px;
+            margin: 24px 0;
+            flex-wrap: wrap;
+        }
+        
+        .feature-item {
+            flex: 1;
+            min-width: 140px;
+            text-align: center;
+            padding: 16px;
+            background-color: #f2f8fe;
+            border-radius: 8px;
+        }
+        
+        .feature-item i {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        
+        .feature-item.cash i {
+            color: #16a34a;
+        }
+        
+        .feature-item.return i {
+            color: #dc2626;
+        }
+        
+        .feature-item.shipping i {
+            color: #0071dc;
+        }
+        
+        .feature-item p {
+            font-size: 13px;
+            font-weight: 600;
+            color: #0a0a0a;
+            margin: 0;
+        }
+        
+        .btn-add-cart {
+            background-color: rgb(255,194,33);
+            color: #0a0a0a;
+            padding: 14px 32px;
+            border-radius: 24px;
+            font-weight: 700;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            border: none;
+            margin-top: 16px;
+        }
+        
+        .btn-add-cart:hover {
+            background-color: #e6af1f;
+            color: #0a0a0a;
+        }
+        
+        .btn-out-of-stock {
+            background-color: #e0e0e0;
+            color: #46474a;
+            cursor: not-allowed;
+        }
+        
+        .alert {
+            padding: 12px 16px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .alert-success {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+        
+        .alert-danger {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+        
+        @media (max-width: 768px) {
+            .product-info-section {
+                padding-left: 0;
+                margin-top: 24px;
+            }
+            
+            .product-title {
+                font-size: 22px;
+            }
+            
+            .current-price {
+                font-size: 26px;
+            }
+        }
+    </style>
+    
+    <div class="product-detail-page">
+        <div class="container-custom">
+            <!-- Breadcrumb -->
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/products">Products</a></li>
+                    <li class="breadcrumb-item active">[[${product.title}]]</li>
+                </ol>
+            </nav>
+            
+            <div class="product-detail-container">
+                <!-- Alert Messages -->
+                <th:block th:if="${session.sucMsg}">
+                    <div class="alert alert-success">
+                        <i class="fa-solid fa-circle-check me-2"></i>
+                        <span th:text="${session.sucMsg}"></span>
+                    </div>
+                    <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+                </th:block>
+                
+                <th:block th:if="${session.errorMsg}">
+                    <div class="alert alert-danger">
+                        <i class="fa-solid fa-circle-exclamation me-2"></i>
+                        <span th:text="${session.errorMsg}"></span>
+                    </div>
+                    <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+                </th:block>
+                
+                <div class="row">
+                    <!-- Product Image -->
+                    <div class="col-lg-6">
+                        <div class="product-image-section">
+                            <img th:src="@{'/img/product_img/'+${product.image}}" th:alt="${product.title}">
+                        </div>
+                    </div>
+                    
+                    <!-- Product Info -->
+                    <div class="col-lg-6">
+                        <div class="product-info-section">
+                            <h1 class="product-title">[[${product.title}]]</h1>
+                            
+                            <!-- Price Section -->
+                            <div class="product-price-section">
+                                <div>
+                                    <span class="current-price">[[${product.discountPrice}]]₫</span>
+                                    <span class="original-price">[[${product.price}]]₫</span>
+                                    <span class="discount-badge">[[${product.discount}]]% OFF</span>
+                                </div>
+                                
+                                <!-- Stock Status -->
+                                <div>
+                                    <th:block th:if="${product.stock > 0}">
+                                        <span class="stock-status stock-available">
+                                            <i class="fa-solid fa-circle-check"></i>
+                                            In Stock
+                                        </span>
+                                    </th:block>
+                                    
+                                    <th:block th:unless="${product.stock > 0}">
+                                        <span class="stock-status stock-out">
+                                            <i class="fa-solid fa-circle-xmark"></i>
+                                            Out of Stock
+                                        </span>
+                                    </th:block>
+                                </div>
+                            </div>
+                            
+                            <!-- Description -->
+                            <div class="product-description">
+                                <h5>Description</h5>
+                                <p>[[${product.description}]]</p>
+                            </div>
+                            
+                            <!-- Product Details -->
+                            <div class="product-details-box">
+                                <h5>Product Details</h5>
+                                <div class="detail-item">
+                                    <span class="detail-label">Category:</span>
+                                    <span class="detail-value">[[${product.category}]]</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Policy:</span>
+                                    <span class="detail-value">7 Days Replacement & Return</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Features -->
+                            <div class="product-features">
+                                <div class="feature-item cash">
+                                    <i class="fa-solid fa-money-bill-wave"></i>
+                                    <p>Cash On Delivery</p>
+                                </div>
+                                <div class="feature-item return">
+                                    <i class="fa-solid fa-rotate-left"></i>
+                                    <p>Easy Returns</p>
+                                </div>
+                                <div class="feature-item shipping">
+                                    <i class="fa-solid fa-truck-fast"></i>
+                                    <p>Free Shipping</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Add to Cart Button -->
+                            <th:block th:if="${product.stock > 0}">
+                                <th:block th:if="${user == null}">
+                                    <a href="/signin" class="btn-add-cart">
+                                        <i class="fa-solid fa-cart-plus"></i>
+                                        Sign In to Add to Cart
+                                    </a>
+                                </th:block>
+                                
+                                <th:block th:unless="${user == null}">
+                                    <a th:href="@{'/user/addCart?pid='+${product.id}+'&uid='+${user.id}}" 
+                                       class="btn-add-cart">
+                                        <i class="fa-solid fa-cart-plus"></i>
+                                        Add to Cart
+                                    </a>
+                                </th:block>
+                            </th:block>
+                            
+                            <th:block th:unless="${product.stock > 0}">
+                                <button class="btn-add-cart btn-out-of-stock" disabled>
+                                    <i class="fa-solid fa-ban"></i>
+                                    Out of Stock
+                                </button>
+                            </th:block>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div class="col-md-6">
-
-          <p class="fs-3">[[${product.title}]]</p>
-          <p>
-            <span class="fw-bold">Description : </span><br>[[${product.description}]]
-
-          </p>
-          <p>
-            <span class="fw-bold"> Product Details: </span> <br>
-            Status :
-            <th:block th:if="${product.stock>0}">
-              <span class="badge bg-success">Available</span>
-            </th:block>
-
-            <th:block th:unless="${product.stock>0}">
-              <span class="badge bg-warning">out of stock</span>
-            </th:block>
-              <br>
-            Category
-            : [[${product.category}]]<br> Policy : 7 Days Replacement & Return
-
-          </p>
-          <p class="fs-5 fw-bold">
-            Price :&nbsp; &nbsp; &nbsp; &nbsp;
-            [[${product.discountPrice}]]<i class="fas fa-dong-sign"></i>  <span
-                  class="fs-6 text-decoration-line-through text-secondary">[[${product.price}]]<i class="fas fa-dong-sign"></i></span>
-            <span class="fs-6  text-success">[[${product.discount}]]% off</span>
-          </p>
-
-          <div class="row">
-            <div class="col-md-4 text-success text-center p-2">
-              <i class="fas fa-money-bill-wave fa-2x"></i>
-              <p>Cash On Delivery</p>
-            </div>
-            <div class="col-md-4 text-danger text-center p-2">
-              <i class="fas fa-undo-alt fa-2x"></i>
-              <p>Return Available</p>
-            </div>
-            <div class="col-md-4 text-primary text-center p-2">
-              <i class="fas fa-truck-moving fa-2x"></i>
-              <p>Free Shipping</p>
-            </div>
-          </div>
-
-          <th:block th:if="${product.stock>0}">
-
-              <th:block th:if="${user==null}">
-                    <a href="/signin" class="btn btn-success col-md-12">Add To Cart</a>
-              </th:block>
-
-              <th:block th:unless="${user==null}">
-                       <a th:href="@{'/user/addCart?pid='+${product.id}+'&uid='+${user.id}}" class="btn btn-success col-md-12">Add To Cart</a>
-              </th:block>
-
-          </th:block>
-
-          <th:block th:unless="${product.stock>0}">
-            <a href="#" class="btn btn-secondary col-md-12">Out of stock</a>
-
-          </th:block>
-
-        </div>
-      </div>
     </div>
-  </div>
-
-
 </section>
 </body>
 </html>

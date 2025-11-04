@@ -2,24 +2,292 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{base::layout(~{::section})}">
 <head>
-    <meta charset="ISO-8859-1">
-    <title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>Order Success - PTN Store</title>
 </head>
 <body>
 <section>
-    <div class="container mt-5 p-5">
-        <div class="row">
-            <div class="col-md-6 offset-md-3 text-center">
-                <i class="fa-solid fa-circle-check fa-5x text-success"></i>
-                <p class="fs-3">Product Ordered Successfully</p>
-                <p class="fs-4">Product will be delivered with in 7 days</p>
-                <div class="text-center">
-                    <a href="/" class="btn btn-primary">Home</a>
-                    <a href="/user/user-order" class="btn btn-primary">Your Order</a>
+    <style>
+        .success-page {
+            background: linear-gradient(135deg, #f2f8fd 0%, #e8f4fd 100%);
+            padding: 60px 20px;
+            min-height: calc(100vh - 300px);
+            display: flex;
+            align-items: center;
+        }
+        
+        .success-container {
+            background: white;
+            border-radius: 12px;
+            padding: 48px 40px;
+            box-shadow: 0 4px 16px rgba(0,113,220,0.15);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            border: 2px solid #0071dc;
+        }
+        
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            animation: scaleIn 0.5s ease-out;
+        }
+        
+        .success-icon i {
+            font-size: 50px;
+            color: white;
+        }
+        
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .success-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0a0a0a;
+            margin-bottom: 12px;
+        }
+        
+        .success-message {
+            font-size: 16px;
+            color: #46474a;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        
+        .order-info {
+            background: #f2f8fe;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 24px 0;
+        }
+        
+        .order-info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .order-info-item:last-child {
+            border-bottom: none;
+        }
+        
+        .order-info-label {
+            font-weight: 600;
+            color: #0a0a0a;
+        }
+        
+        .order-info-value {
+            color: #0071dc;
+            font-weight: 700;
+        }
+        
+        .delivery-info {
+            background-color: #fff3cd;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 24px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .delivery-info i {
+            font-size: 36px;
+            color: #f59e0b;
+        }
+        
+        .delivery-info-text {
+            text-align: left;
+        }
+        
+        .delivery-info-text h5 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #92400e;
+            margin-bottom: 4px;
+        }
+        
+        .delivery-info-text p {
+            font-size: 13px;
+            color: #92400e;
+            margin: 0;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 32px;
+        }
+        
+        .btn-action {
+            padding: 12px 28px;
+            border-radius: 24px;
+            font-weight: 700;
+            font-size: 15px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .btn-primary-action {
+            background-color: #0071dc;
+            color: white;
+        }
+        
+        .btn-primary-action:hover {
+            background-color: #004f9a;
+            color: white;
+        }
+        
+        .btn-secondary-action {
+            background-color: rgb(255,194,33);
+            color: #0a0a0a;
+        }
+        
+        .btn-secondary-action:hover {
+            background-color: #e6af1f;
+            color: #0a0a0a;
+        }
+        
+        .features-list {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .feature-item {
+            text-align: center;
+        }
+        
+        .feature-item i {
+            font-size: 28px;
+            color: #0071dc;
+            margin-bottom: 8px;
+        }
+        
+        .feature-item p {
+            font-size: 13px;
+            color: #46474a;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .success-container {
+                padding: 36px 24px;
+            }
+            
+            .success-title {
+                font-size: 26px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn-action {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .features-list {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+    </style>
+    
+    <div class="success-page">
+        <div class="container">
+            <div class="success-container">
+                <!-- Success Icon -->
+                <div class="success-icon">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                
+                <!-- Success Title -->
+                <h1 class="success-title">Order Placed Successfully!</h1>
+                
+                <!-- Success Message -->
+                <p class="success-message">
+                    Thank you for your purchase. Your order has been received and is being processed.
+                </p>
+                
+                <!-- Delivery Information -->
+                <div class="delivery-info">
+                    <i class="fa-solid fa-truck-fast"></i>
+                    <div class="delivery-info-text">
+                        <h5>Estimated Delivery</h5>
+                        <p>Your order will be delivered within 7 business days</p>
+                    </div>
+                </div>
+                
+                <!-- Order Info -->
+                <div class="order-info">
+                    <div class="order-info-item">
+                        <span class="order-info-label">Order Status:</span>
+                        <span class="order-info-value">Processing</span>
+                    </div>
+                    <div class="order-info-item">
+                        <span class="order-info-label">Payment Method:</span>
+                        <span class="order-info-value">Cash on Delivery</span>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <a href="/user/user-order" class="btn-action btn-primary-action">
+                        <i class="fa-solid fa-box"></i>
+                        View My Orders
+                    </a>
+                    <a href="/" class="btn-action btn-secondary-action">
+                        <i class="fa-solid fa-home"></i>
+                        Back to Home
+                    </a>
+                </div>
+                
+                <!-- Features -->
+                <div class="features-list">
+                    <div class="feature-item">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <p>Secure Payment</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fa-solid fa-headset"></i>
+                        <p>24/7 Support</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fa-solid fa-rotate-left"></i>
+                        <p>Easy Returns</p>
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
 </section>
 </body>

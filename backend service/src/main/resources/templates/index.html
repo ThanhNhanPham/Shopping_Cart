@@ -1,172 +1,353 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{base::layout(~{::section})}">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>PTN Store - Your Shopping Destination</title>
 </head>
 <body>
-    <section>
-        <!--Start Slider -->
-        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="img/heli1.jpg" class="d-block w-100" alt="..." height="350px">
-                </div>
-                <div class="carousel-item">
-                    <img src="img/heli2.jpg" class="d-block w-100" alt="..." height="350px">
-                </div>
-                <div class="carousel-item">
-                    <img src="img/heli3.jpg" class="d-block w-100" alt="..." height="350px">
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+<section>
+    <style>
+        /* Hero Slider */
+        .hero-slider {
+            margin-bottom: 40px;
+        }
+        
+        .hero-slider .carousel-item {
+            height: 450px;
+            background-color: #f2f8fe;
+        }
+        
+        .hero-slider .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Section Titles */
+        .section-header {
+            margin: 48px 0 32px;
+        }
+        
+        .section-header h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #0a0a0a;
+            margin-bottom: 8px;
+        }
+        
+        .section-header p {
+            color: #46474a;
+            font-size: 15px;
+        }
+        
+        /* Categories */
+        .categories-section {
+            padding: 40px 0;
+            background-color: white;
+        }
+        
+        .category-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 24px 16px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            margin-bottom: 24px;
+        }
+        
+        .category-card:hover {
+            border-color: #0071dc;
+            box-shadow: 0 4px 12px rgba(0,113,220,0.15);
+            transform: translateY(-4px);
+        }
+        
+        .category-card img {
+            width: 100%;
+            max-width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-bottom: 16px;
+        }
+        
+        .category-card a {
+            text-decoration: none;
+            color: #0a0a0a;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        
+        .category-card:hover a {
+            color: #0071dc;
+        }
+        
+        /* Products */
+        .products-section {
+            padding: 40px 0;
+            background-color: #f2f8fe;
+        }
+        
+        .product-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            transform: translateY(-4px);
+            border-color: #0071dc;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            padding: 16px;
+            background-color: #fafafa;
+        }
+        
+        .product-body {
+            padding: 16px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #0a0a0a;
+            margin-bottom: 12px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            min-height: 40px;
+            text-decoration: none;
+        }
+        
+        .product-title:hover {
+            color: #0071dc;
+        }
+        
+        .product-price {
+            margin-top: auto;
+        }
+        
+        .current-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0a0a0a;
+        }
+        
+        .original-price {
+            font-size: 14px;
+            text-decoration: line-through;
+            color: #46474a;
+            margin-left: 8px;
+        }
+        
+        .discount-badge {
+            background-color: #16a34a;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 8px;
+        }
+        
+        .btn-view-product {
+            background-color: rgb(255,194,33);
+            color: #0a0a0a;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+            display: block;
+            margin-top: 12px;
+            transition: all 0.3s;
+        }
+        
+        .btn-view-product:hover {
+            background-color: #e6af1f;
+            color: #0a0a0a;
+        }
+        
+        /* Features Section */
+        .features-section {
+            padding: 48px 0;
+            background-color: white;
+        }
+        
+        .feature-box {
+            text-align: center;
+            padding: 24px 16px;
+        }
+        
+        .feature-box i {
+            font-size: 48px;
+            color: #0071dc;
+            margin-bottom: 16px;
+        }
+        
+        .feature-box h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0a0a0a;
+            margin-bottom: 8px;
+        }
+        
+        .feature-box p {
+            font-size: 14px;
+            color: #46474a;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-slider .carousel-item {
+                height: 300px;
+            }
+            
+            .section-header h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+    
+    <!-- Hero Slider -->
+    <div id="heroCarousel" class="carousel slide hero-slider" data-bs-ride="carousel" data-bs-interval="4000">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
         </div>
-
-        <!--End Slider -->
-
-
-        <!--Start Category Module-->
-        <div class="container">
+        
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="img/heli1.jpg" class="d-block w-100" alt="Banner 1">
+            </div>
+            <div class="carousel-item">
+                <img src="img/heli2.jpg" class="d-block w-100" alt="Banner 2">
+            </div>
+            <div class="carousel-item">
+                <img src="img/heli3.jpg" class="d-block w-100" alt="Banner 3">
+            </div>
+        </div>
+        
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+    
+    <!-- Categories Section -->
+    <div class="categories-section">
+        <div class="container" style="max-width: 1600px;">
+            <div class="section-header text-center">
+                <h2>Shop by Category</h2>
+                <p>Browse our wide selection of product categories</p>
+            </div>
+            
             <div class="row">
-                <p class="text-center fs-4">Category</p>
-                <div class="col-md-2" th:each="c:${categories}">
-                    <div
-                        class="card rounded-circle shadow-sm p-3 mb-5 bg-body-tertiary rounded">
-                        <div class="card-body text-center">
-                            <img th:src="@{'img/category_img/'+${c.imageName}}" width="65%" height="140px">
-                            <a th:href="@{'/products?category='+${c.name}}" class="text-decoration-none text-dark">[[${c.name}]]</a>
-
-                        </div>
-
-
+                <div class="col-lg-2 col-md-4 col-6" th:each="c:${categories}">
+                    <div class="category-card">
+                        <img th:src="@{'img/category_img/'+${c.imageName}}" th:alt="${c.name}">
+                        <a th:href="@{'/products?category='+${c.name}}">[[${c.name}]]</a>
                     </div>
-
                 </div>
-
-<!--                <div class="col-md-2">-->
-<!--                    <div-->
-<!--                            class="card rounded-circle shadow-sm p-3 mb-5 bg-body-tertiary rounded">-->
-<!--                        <div class="card-body text-center">-->
-<!--                            <img src="img/category_img/mobile.png" width="65%" height="140px">-->
-<!--                            <p>Mobile</p>-->
-
-<!--                        </div>-->
-
-
-<!--                    </div>-->
-
-<!--                </div>-->
-
-
-<!--                <div class="col-md-2">-->
-<!--                    <div-->
-<!--                            class="card rounded-circle shadow-sm p-3 mb-5 bg-body-tertiary rounded">-->
-<!--                        <div class="card-body text-center">-->
-<!--                            <img src="img/category_img/shirt.png" width="65%" height="140px">-->
-<!--                            <p>Clothes</p>-->
-
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="col-md-2">-->
-<!--                    <div-->
-<!--                            class="card rounded-circle shadow-sm p-3 mb-5 bg-body-tertiary rounded">-->
-<!--                        <div class="card-body text-center">-->
-<!--                            <img src="img/category_img/beuty.png" width="65%" height="140px">-->
-<!--                            <p>Beauty</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="col-md-2">-->
-<!--                    <div-->
-<!--                            class="card rounded-circle shadow-sm p-3 mb-5 bg-body-tertiary rounded">-->
-<!--                        <div class="card-body text-center">-->
-<!--                            <img src="img/category_img/shoes.jpg" width="65%" height="140px">-->
-<!--                            <p>Shoes</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="col-md-2">-->
-<!--                    <div-->
-<!--                            class="card rounded-circle shadow-sm p-3 mb-5 bg-body-tertiary rounded">-->
-<!--                        <div class="card-body text-center">-->
-<!--                            <img src="img/category_img/pant.png" width="65%" height="140px">-->
-<!--                            <p>Laptop</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
             </div>
         </div>
-
-        <!--End Category Module-->
-
-
-
-        <!--Start Latest Product Module-->
-        <div class="container-fluid bg-light p-3">
+    </div>
+    
+    <!-- Latest Products Section -->
+    <div class="products-section">
+        <div class="container" style="max-width: 1600px;">
+            <div class="section-header text-center">
+                <h2>Latest Products</h2>
+                <p>Check out our newest arrivals and trending items</p>
+            </div>
+            
             <div class="row">
-                <p class="text-center fs-4">Latest Product</p>
-                <div class="col-md-3 mt-3" th:each="p:${products}">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <img alt="" th:src="@{'img/product_img/'+${p.image}}" class="" width="65%"
-                            height="140px">
-                            <p class="text-center"><a th:href="@{'/product/'+${p.id}}" class="text-decoration-none text-dark" > [[${p.title}]] </a></p>
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4" th:each="p:${products}">
+                    <div class="product-card">
+                        <img th:src="@{'img/product_img/'+${p.image}}" th:alt="${p.title}" class="product-image">
+                        
+                        <div class="product-body">
+                            <a th:href="@{'/product/'+${p.id}}" class="product-title">
+                                [[${p.title}]]
+                            </a>
+                            
+                            <div class="product-price">
+                                <span class="current-price">[[${p.discountPrice}]]₫</span>
+                                <span class="original-price">[[${p.price}]]₫</span>
+                                <br>
+                                <span class="discount-badge">[[${p.discount}]]% OFF</span>
+                            </div>
+                            
+                            <a th:href="@{'/product/'+${p.id}}" class="btn-view-product">
+                                View Details
+                            </a>
                         </div>
                     </div>
                 </div>
-
-<!--                <div class="col-md-3">-->
-<!--                    <div class="card">-->
-<!--                        <div class="card-body text-center">-->
-<!--                            <img alt="" src="img/product_img/laptop1.png" class="" width="65%"-->
-<!--                                 height="140px">-->
-<!--                            <p class="text-center">HD Laptop</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="col-md-3">-->
-<!--                    <div class="card">-->
-<!--                        <div class="card-body text-center">-->
-<!--                            <img alt="" src="img/product_img/laptop1.png" class="" width="65%"-->
-<!--                                 height="140px">-->
-<!--                            <p class="text-center">HD Laptop</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="col-md-3">-->
-<!--                    <div class="card">-->
-<!--                        <div class="card-body text-center">-->
-<!--                            <img alt="" src="img/product_img/laptop1.png" class="" width="65%"-->
-<!--                                 height="140px">-->
-<!--                            <p class="text-center">HD Laptop</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-                </div>
-
             </div>
-
+            
+            <div class="text-center mt-4">
+                <a href="/products" class="btn-walmart-primary">
+                    View All Products
+                </a>
+            </div>
         </div>
-
-
-        <!--End Latest Product Module-->
-
-
-
-    </section>
+    </div>
+    
+    <!-- Features Section -->
+    <div class="features-section">
+        <div class="container" style="max-width: 1600px;">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="feature-box">
+                        <i class="fa-solid fa-truck-fast"></i>
+                        <h4>Free Shipping</h4>
+                        <p>On orders over 500k₫</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="feature-box">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <h4>Secure Payment</h4>
+                        <p>100% secure transactions</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="feature-box">
+                        <i class="fa-solid fa-rotate-left"></i>
+                        <h4>Easy Returns</h4>
+                        <p>7-day return policy</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="feature-box">
+                        <i class="fa-solid fa-headset"></i>
+                        <h4>24/7 Support</h4>
+                        <p>Dedicated customer service</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>

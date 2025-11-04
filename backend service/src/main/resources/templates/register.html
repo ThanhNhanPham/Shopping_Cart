@@ -1,112 +1,227 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{base::layout(~{::section})}">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create Account - PTN Store</title>
 </head>
 <body>
 <section>
-    <div class="container mt-5 p-5">
-        <div class="row">
-            <div class="col-md-5 p-5">
-                <img alt="" src="img/ecom.png" width="100%" height="400px">
+    <style>
+        .register-page {
+            background-color: #f2f8fe;
+            padding: 40px 20px;
+        }
+        
+        .register-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 40px;
+        }
+        
+        .register-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        
+        .register-header h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #0a0a0a;
+            margin-bottom: 8px;
+        }
+        
+        .register-header p {
+            color: #46474a;
+            font-size: 14px;
+        }
+        
+        .form-section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0a0a0a;
+            margin: 24px 0 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #0071dc;
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #0a0a0a;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 15px;
+            font-family: 'DM Sans', sans-serif;
+            transition: border-color 0.2s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #0071dc;
+            box-shadow: 0 0 0 3px rgba(0,113,220,0.1);
+        }
+        
+        .btn-register {
+            width: 100%;
+            background-color: #0071dc;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 24px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 24px;
+        }
+        
+        .btn-register:hover {
+            background-color: #004f9a;
+        }
+        
+        .signin-link {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 14px;
+        }
+        
+        .signin-link a {
+            color: #0071dc;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .signin-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    
+    <div class="register-page">
+        <div class="register-container">
+            <div class="register-header">
+                <h2>Create Account</h2>
+                <p>Join PTN Store and start shopping today!</p>
             </div>
-
-            <div class="col-md-7 p-2">
-                <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
-                    <div class="card-header text-center ">
-                        <p class="fs-4 text-center">Register</p>
-                        <!-- Hien thi thong bao -->
-                        <th:block th:if="${session.sucMsg}">
-                            <p class="text-success fw-bold">[[${session.sucMsg}]]</p>
-                            <!-- thuc hien de xoa thong bao -->
-                            <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"> </th:block>
-                        </th:block>
-
-                        <th:block th:if="${session.errorMsg}">
-                            <p class="text-danger fw-bold">[[${session.errorMsg}]]</p>
-                            <!-- thuc hien de xoa thong bao -->
-                            <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"> </th:block>
-                        </th:block>
-
-                    </div>
-
-                    <div class="card-body">
-                        <form action="/saveRegister" enctype="multipart/form-data" method="post" id="userRegister" novalidate>
-                            <div class="row">
-                                    <div class="col">
-                                        <label class="form-label">Full Name</label>
-                                        <input class="form-control" name="name" type="text" required>
-                                    </div>
-                                    <div class="col">
-                                        <label class="form-label">Mobile Number</label>
-                                        <input class="form-control" name="mobileNumber" type="number" required>
-                                    </div>
-                            </div>
-
-                            <div class="mb-3">
-                                    <label class="form-label">Email</label>
-                                    <input class="form-control" name="email" type="email" required>
-                            </div>
-
-                            <div class="row">
-                                    <div class="col">
-                                        <label class="form-label">Address</label>
-                                        <input class="form-control" name="address" type="text" required>
-                                    </div>
-                                    <div class="col">
-                                        <label class="form-label">City</label>
-                                        <input class="form-control" name="city" type="text" required>
-                                    </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col">
-                                    <label class="form-label">State</label>
-                                    <input class="form-control" name="state" type="text" required>
-                                </div>
-                                <div class="col">
-                                    <label class="form-label">Pincode</label>
-                                    <input class="form-control" name="pincode" type="number" required>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col">
-                                    <label class="form-label">Password</label>
-                                    <input class="form-control" name="password" type="password"  id ="pass" required>
-                                </div>
-                                <div class="col">
-                                    <label class="form-label">Confirm Password</label>
-                                    <input class="form-control" name="confirmpassword" type="password" required>
-                                </div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Profile Image</label>
-                                <input class="form-control" name="img" type="file" required>
-                            </div>
-
-
-
-                            <button type="submit"
-                                    class="btn bg-primary text-white col-md-12" >Register</button>
-                        </form>
-                    </div>
-
-                    <div class="card-footer text-center">
-                        bạn đã có tài khoản? <a href="/signin" class="text-decoration-none">Đăng nhập</a>
-
-                    </div>
-
+            
+            <!-- Alert Messages -->
+            <th:block th:if="${session.sucMsg}">
+                <div class="alert alert-success">
+                    <i class="fa-solid fa-circle-check me-2"></i>
+                    <span th:text="${session.sucMsg}"></span>
                 </div>
-
+                <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+            </th:block>
+            
+            <th:block th:if="${session.errorMsg}">
+                <div class="alert alert-danger">
+                    <i class="fa-solid fa-circle-exclamation me-2"></i>
+                    <span th:text="${session.errorMsg}"></span>
+                </div>
+                <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+            </th:block>
+            
+            <!-- Validation Summary (will be populated by JS) -->
+            <div id="validation-summary" style="display: none; background: #fee2e2; border-left: 4px solid #dc2626; padding: 16px 20px; border-radius: 6px; margin-bottom: 24px;">
+                <div style="display: flex; align-items: flex-start; gap: 12px;">
+                    <i class="fa-solid fa-circle-exclamation" style="color: #dc2626; font-size: 20px; margin-top: 2px;"></i>
+                    <div style="flex: 1;">
+                        <h5 style="color: #991b1b; font-size: 16px; font-weight: 700; margin: 0 0 8px 0;">Please correct the following errors:</h5>
+                        <ul id="error-list" style="margin: 0; padding-left: 20px; color: #991b1b; font-size: 14px; line-height: 1.8;">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Registration Form -->
+            <form action="/saveRegister" enctype="multipart/form-data" method="post" id="userRegister" novalidate>
+                <!-- Personal Information -->
+                <div class="form-section-title">Personal Information</div>
+                
+                <div class="row mb-3">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Full Name *</label>
+                        <input class="form-control" name="name" type="text" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Mobile Number *</label>
+                        <input class="form-control" name="mobileNumber" type="number" placeholder="Enter mobile number" required>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Email Address *</label>
+                    <input class="form-control" name="email" type="email" placeholder="Enter your email" required>
+                </div>
+                
+                <!-- Address Information -->
+                <div class="form-section-title">Address Information</div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Address *</label>
+                    <input class="form-control" name="address" type="text" placeholder="Enter your address" required>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">City *</label>
+                        <input class="form-control" name="city" type="text" placeholder="Enter city" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">State *</label>
+                        <input class="form-control" name="state" type="text" placeholder="Enter state" required>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Pincode *</label>
+                    <input class="form-control" name="pincode" type="number" placeholder="Enter pincode" required>
+                </div>
+                
+                <!-- Account Security -->
+                <div class="form-section-title">Account Security</div>
+                
+                <div class="row mb-3">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Password *</label>
+                        <input class="form-control" name="password" type="password" id="pass" placeholder="Create password" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Confirm Password *</label>
+                        <input class="form-control" name="confirmpassword" type="password" placeholder="Confirm password" required>
+                    </div>
+                </div>
+                
+                <!-- Profile Picture -->
+                <div class="form-section-title">Profile Picture</div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Upload Profile Image *</label>
+                    <input class="form-control" name="img" type="file" accept="image/*" required>
+                </div>
+                
+                <button type="submit" class="btn-register">
+                    Create Account
+                </button>
+            </form>
+            
+            <div class="signin-link">
+                Already have an account? <a href="/signin">Sign in here</a>
             </div>
         </div>
     </div>
-
 </section>
-
 </body>
 </html>
