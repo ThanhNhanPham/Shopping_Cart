@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sản Phẩm Gợi Ý Cho Bạn</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        }
+        .navbar-brand {
+            color: white !important;
+            font-weight: bold;
+            font-size: 24px;
+        }
+        .nav-link {
+            color: white !important;
+        }
+        .nav-link:hover {
+            color: #ffd700 !important;
+        }
+        .page-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 0;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .page-header h2 {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .page-header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .card-img-top {
+            height: 250px;
+            object-fit: cover;
+            background: #f8f9fa;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .card-title {
+            font-weight: bold;
+            color: #333;
+            min-height: 48px;
+        }
+        .card-text {
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .badge-rating {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-right: 5px;
+        }
+        .badge-score {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+        .btn-primary:hover {
+            transform: scale(1.05);
+        }
+        .btn-secondary {
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-weight: bold;
+        }
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+        }
+        .modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+        .modal-title {
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 50px;
+            padding: 30px 0;
+        }
+        .action-buttons {
+            margin: 30px 0;
+            text-align: center;
+        }
+        .action-buttons .btn {
+            margin: 0 10px;
+        }
+        .product-count {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .product-count strong {
+            color: #667eea;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <i class="fas fa-shopping-cart"></i> Ecommerce Recommendation System
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/index"><i class="fas fa-home"></i> Trang chủ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/main"><i class="fas fa-search"></i> Tìm kiếm</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/preferences"><i class="fas fa-sliders-h"></i> Sở thích</a>
+                </li>
+                {% if username %}
+                <li class="nav-item">
+                    <a class="nav-link"><i class="fas fa-user"></i> {{ username }}</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Header -->
+<div class="page-header">
+    <div class="container">
+        <h2><i class="fas fa-gift"></i> Sản Phẩm Gợi Ý Dành Cho Bạn</h2>
+        <p>Được chọn lọc dựa trên sở thích và nhu cầu của bạn</p>
+    </div>
+</div>
+
+<!-- Action Buttons -->
+<div class="container">
+    <div class="action-buttons">
+        <a href="/preferences" class="btn btn-primary">
+            <i class="fas fa-edit"></i> Cập Nhật Sở Thích
+        </a>
+        <a href="/main" class="btn btn-secondary">
+            <i class="fas fa-search"></i> Tìm Kiếm Theo Tên
+        </a>
+    </div>
+</div>
+
+<!-- Product Count -->
+<div class="container">
+    <div class="product-count">
+        <p class="mb-0">Chúng tôi tìm thấy <strong>{{ products|length }}</strong> sản phẩm phù hợp với bạn!</p>
+    </div>
+</div>
+
+<!-- Products -->
+{% if products is defined and not products.empty %}
+<div class="container">
+    <div class="row">
+        {% for index, product in products.iterrows() %}
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card">
+                <img src="{{ product['ImageURL'] }}" class="card-img-top" alt="{{ product['Name'] }}" 
+                     onerror="this.src='{{ random_product_image_urls[loop.index0 % random_product_image_urls|length] }}'">
+                <div class="card-body">
+                    <h5 class="card-title">{{ truncate(product['Name'], 50) }}</h5>
+                    <p class="card-text">
+                        <i class="fas fa-tag"></i> <strong>Brand:</strong> {{ product['Brand'] }}<br>
+                        <i class="fas fa-th-large"></i> <strong>Category:</strong> {{ product['Category'][:30] }}...
+                    </p>
+                    <div class="mb-2">
+                        <span class="badge-rating">
+                            <i class="fas fa-star"></i> {{ "%.1f"|format(product['Rating']) }}
+                        </span>
+                        <span class="badge-score">
+                            <i class="fas fa-thumbs-up"></i> {{ "%.0f"|format(product['ReviewCount']) }} reviews
+                        </span>
+                    </div>
+                    {% if product['similarity_score'] is defined %}
+                    <p class="card-text">
+                        <small class="text-muted">
+                            <i class="fas fa-chart-line"></i> Độ phù hợp: {{ "%.0f"|format(product['final_score'] * 100) }}%
+                        </small>
+                    </p>
+                    {% endif %}
+                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#productModal{{ index }}">
+                        <i class="fas fa-eye"></i> Xem Chi Tiết
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for Product Details -->
+        <div class="modal fade" id="productModal{{ index }}" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ product['Name'] }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="color: white;">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <img src="{{ product['ImageURL'] }}" class="img-fluid rounded" alt="{{ product['Name'] }}"
+                                     onerror="this.src='{{ random_product_image_urls[loop.index0 % random_product_image_urls|length] }}'">
+                            </div>
+                            <div class="col-md-7">
+                                <h5><i class="fas fa-tag"></i> Thông Tin Sản Phẩm</h5>
+                                <hr>
+                                <p><strong><i class="fas fa-building"></i> Thương hiệu:</strong> {{ product['Brand'] }}</p>
+                                <p><strong><i class="fas fa-th-large"></i> Danh mục:</strong> {{ product['Category'] }}</p>
+                                <p><strong><i class="fas fa-star"></i> Đánh giá:</strong> 
+                                    <span class="badge-rating">{{ "%.1f"|format(product['Rating']) }}/5.0</span>
+                                </p>
+                                <p><strong><i class="fas fa-comments"></i> Số lượt đánh giá:</strong> {{ "%.0f"|format(product['ReviewCount']) }}</p>
+                                <p><strong><i class="fas fa-dollar-sign"></i> Giá:</strong> ${{ random_price }}</p>
+                                {% if product['similarity_score'] is defined %}
+                                <p><strong><i class="fas fa-chart-line"></i> Điểm phù hợp:</strong> 
+                                    <span class="badge-score">{{ "%.0f"|format(product['final_score'] * 100) }}%</span>
+                                </p>
+                                <div class="alert alert-info">
+                                    <small>
+                                        <i class="fas fa-info-circle"></i> 
+                                        Sản phẩm này được gợi ý dựa trên sở thích của bạn với độ tương đồng 
+                                        <strong>{{ "%.0f"|format(product['similarity_score'] * 100) }}%</strong>
+                                    </small>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            <i class="fas fa-times"></i> Đóng
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                            <i class="fas fa-shopping-cart"></i> Thêm Vào Giỏ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+<div class="container">
+    <div class="alert alert-warning text-center">
+        <i class="fas fa-exclamation-triangle"></i> 
+        Không tìm thấy sản phẩm phù hợp. Vui lòng <a href="/preferences">cập nhật sở thích</a> của bạn!
+    </div>
+</div>
+{% endif %}
+
+<!-- Footer -->
+<footer class="footer bg-dark text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h5><i class="fas fa-shopping-cart"></i> Ecommerce System</h5>
+                <p>Hệ thống gợi ý sản phẩm thông minh sử dụng Machine Learning để đem đến trải nghiệm mua sắm tốt nhất.</p>
+            </div>
+            <div class="col-md-4">
+                <h5><i class="fas fa-link"></i> Liên Kết</h5>
+                <ul class="list-unstyled">
+                    <li><a href="/index" class="text-white">Trang chủ</a></li>
+                    <li><a href="/main" class="text-white">Tìm kiếm</a></li>
+                    <li><a href="/preferences" class="text-white">Sở thích</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h5><i class="fas fa-envelope"></i> Liên Hệ</h5>
+                <p>
+                    <i class="fas fa-phone"></i> +84 123 456 789<br>
+                    <i class="fas fa-envelope"></i> support@ecommerce.vn
+                </p>
+            </div>
+        </div>
+        <hr class="bg-light">
+        <p class="text-center mb-0">© 2025 Ecommerce Recommendation System. Powered by Machine Learning & TF-IDF.</p>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

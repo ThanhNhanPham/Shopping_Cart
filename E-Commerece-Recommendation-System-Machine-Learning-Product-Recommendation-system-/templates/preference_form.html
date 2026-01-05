@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tùy Chỉnh Sở Thích</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+        .preference-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            padding: 40px;
+        }
+        .form-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-header h2 {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .form-header p {
+            color: #666;
+        }
+        .form-section {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        .form-section label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        .checkbox-item:hover {
+            background: #e3f2fd;
+        }
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+        .btn-submit {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 50px;
+            width: 100%;
+            transition: transform 0.3s;
+        }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        .alert-custom {
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .welcome-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="preference-container">
+        <!-- Welcome Message -->
+        {% if username %}
+        <div class="welcome-text">
+            <i class="fas fa-user-circle"></i> Xin chào, <strong>{{ username }}</strong>!
+        </div>
+        {% endif %}
+
+        <!-- Header -->
+        <div class="form-header">
+            <h2><i class="fas fa-sliders-h"></i> Tùy Chỉnh Sở Thích Của Bạn</h2>
+            <p>Cho chúng tôi biết sở thích để nhận được gợi ý sản phẩm phù hợp nhất!</p>
+        </div>
+
+        <!-- Error/Success Message -->
+        {% if message %}
+        <div class="alert alert-warning alert-custom">
+            <i class="fas fa-exclamation-triangle"></i> {{ message }}
+        </div>
+        {% endif %}
+
+        <!-- Form -->
+        <form action="/save_preferences" method="post">
+            
+            <!-- Danh mục sản phẩm -->
+            <div class="form-section">
+                <label><i class="fas fa-th-large"></i> Danh mục sản phẩm quan tâm:</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="categories" value="beauty" id="cat1">
+                        <label for="cat1" class="mb-0">🎨 Làm đẹp (Beauty)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="categories" value="hair care" id="cat2">
+                        <label for="cat2" class="mb-0">💇 Chăm sóc tóc</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="categories" value="makeup" id="cat3">
+                        <label for="cat3" class="mb-0">💄 Trang điểm</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="categories" value="personal care" id="cat4">
+                        <label for="cat4" class="mb-0">🧴 Chăm sóc cá nhân</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="categories" value="oral care" id="cat5">
+                        <label for="cat5" class="mb-0">🦷 Răng miệng</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="categories" value="shave" id="cat6">
+                        <label for="cat6" class="mb-0">🪒 Cạo râu</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thương hiệu yêu thích -->
+            <div class="form-section">
+                <label for="brands"><i class="fas fa-tag"></i> Thương hiệu yêu thích:</label>
+                <input type="text" class="form-control" name="brands" id="brands"
+                       placeholder="VD: Gillette, Colgate, OPI (cách nhau bởi dấu phẩy)">
+                <small class="form-text text-muted">Để trống nếu không có ưu tiên thương hiệu cụ thể</small>
+            </div>
+
+            <div class="row">
+                <!-- Đánh giá tối thiểu -->
+                <div class="col-md-6">
+                    <div class="form-section">
+                        <label for="min_rating"><i class="fas fa-star"></i> Đánh giá tối thiểu:</label>
+                        <select class="form-control" name="min_rating" id="min_rating">
+                            <option value="0">Tất cả</option>
+                            <option value="3.0">⭐⭐⭐ 3.0 sao trở lên</option>
+                            <option value="4.0" selected>⭐⭐⭐⭐ 4.0 sao trở lên</option>
+                            <option value="4.5">⭐⭐⭐⭐⭐ 4.5 sao trở lên</option>
+                            <option value="5.0">⭐⭐⭐⭐⭐ Chỉ 5.0 sao</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Mức độ phổ biến -->
+                <div class="col-md-6">
+                    <div class="form-section">
+                        <label for="min_reviews"><i class="fas fa-fire"></i> Mức độ phổ biến:</label>
+                        <select class="form-control" name="min_reviews" id="min_reviews">
+                            <option value="0" selected>Tất cả</option>
+                            <option value="100">100+ đánh giá</option>
+                            <option value="500">500+ đánh giá</option>
+                            <option value="1000">1000+ đánh giá</option>
+                            <option value="5000">5000+ đánh giá (Rất phổ biến)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Từ khóa quan tâm -->
+            <div class="form-section">
+                <label for="keywords"><i class="fas fa-key"></i> Từ khóa/Đặc điểm quan tâm:</label>
+                <input type="text" class="form-control" name="keywords" id="keywords"
+                       placeholder="VD: natural, organic, premium, long lasting, moisturizing">
+                <small class="form-text text-muted">Nhập các từ khóa mô tả đặc điểm sản phẩm bạn muốn tìm</small>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary btn-submit">
+                <i class="fas fa-search"></i> Tìm Sản Phẩm Phù Hợp
+            </button>
+
+            <!-- Back to Home -->
+            <div class="text-center mt-3">
+                <a href="/index" class="text-muted"><i class="fas fa-home"></i> Quay lại trang chủ</a>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
